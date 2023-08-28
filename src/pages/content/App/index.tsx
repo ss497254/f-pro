@@ -9,19 +9,16 @@ const root = document.createElement("div");
 const rootIntoShadow = document.createElement("div");
 
 root.id = "ad-blocker";
-rootIntoShadow.id = "shadow-root";
-
-const area = window.innerWidth * 40;
-const height = area > 16 * 1000 ? "40px" : "80px";
-
-root.style.position = "relative";
+root.draggable = true;
+root.style.position = "absolute";
 root.style.zIndex = "2147483647";
-root.style.bottom = "0";
+root.style.top = "0";
+root.style.left = "0";
 root.style.right = "0";
-root.style.height = height;
 
-document.body.style.height = `calc(100vh - ${height})`;
+document.body.style.marginTop = `30px`;
 
+rootIntoShadow.id = "shadow-root";
 rootIntoShadow.onkeydown = (e) => {
   e.stopImmediatePropagation();
   e.stopPropagation();

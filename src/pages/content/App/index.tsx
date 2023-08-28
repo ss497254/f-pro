@@ -1,5 +1,5 @@
 import { createRoot } from "react-dom/client";
-import App from "./BottomBar";
+import Main from "./components/Main";
 import refreshOnUpdate from "virtual:reload-on-update-in-view";
 import { attachTwindStyle } from "@src/shared/style/twind";
 
@@ -16,7 +16,7 @@ root.style.top = "0";
 root.style.left = "0";
 root.style.right = "0";
 
-document.body.style.marginTop = `30px`;
+document.body.style.marginTop = "30px";
 
 rootIntoShadow.id = "shadow-root";
 rootIntoShadow.onkeydown = (e) => {
@@ -37,4 +37,4 @@ attachTwindStyle(rootIntoShadow, shadowRoot);
 
 const Root = createRoot(rootIntoShadow);
 
-Root.render(<App />);
+Root.render(<Main />);

@@ -2,8 +2,16 @@
   "compilerOptions": {
     "noEmit": true,
     "baseUrl": ".",
-    "allowJs": false,
+    "allowJs": true,
     "target": "esnext",
+    "experimentalDecorators": true,
+    "noEmitOnError": false,
+    "importHelpers": true,
+    "strict": true,
+    "preserveSymlinks": true,
+    "downlevelIteration": true,
+    "isolatedModules": true,
+    "incremental": true,
     "module": "esnext",
     "jsx": "react-jsx",
     "skipLibCheck": true,
@@ -27,3 +35,4 @@
   },
   "include": ["src", "utils", "vite.config.ts", "node_modules/@types"]
 }
+

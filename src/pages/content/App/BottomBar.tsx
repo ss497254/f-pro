@@ -1,19 +1,19 @@
-import { useIsOpenStore } from "../stores/useIsOpenStore";
-import { useLoginStore } from "../stores/useLoginStore";
+import { useIsOpenStore } from "./stores/useIsOpenStore";
+import { useLoginStore } from "./stores/useLoginStore";
 import { LoginBar } from "./components/LoginBar";
 import { Button } from "./ui/Buttons";
+import { DraggableCloseBtn } from "./components/DraggableCloseBtn";
 
 export default function BottomBar() {
-  const { open, toggleOpen } = useIsOpenStore();
+  const { open } = useIsOpenStore();
   const { loggedIn } = useLoginStore();
 
   return (
-    <div className="flex bg-inherit" style={{ width: open ? "w-full" : "fit" }}>
+    <div className="flex bg-inherit" style={{ height: open ? 30 : 0 }}>
       <div
         className="mr-4 flex-grow"
         style={{
-          display: open ? "flex" : "hidden",
-          opacity: open ? 1 : 0,
+          display: open ? "flex" : "none",
         }}
       >
         {loggedIn ? (
@@ -22,14 +22,7 @@ export default function BottomBar() {
           <LoginBar />
         )}
       </div>
-      <Button
-        btn="none"
-        className="hover:bg-black"
-        style={{ height: 40, width: 40 }}
-        onClick={toggleOpen}
-      >
-        X
-      </Button>
+      <DraggableCloseBtn />
     </div>
   );
 }

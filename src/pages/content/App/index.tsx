@@ -22,6 +22,15 @@ root.style.height = height;
 
 document.body.style.height = `calc(100vh - ${height})`;
 
+rootIntoShadow.onkeydown = (e) => {
+  e.stopImmediatePropagation();
+  e.stopPropagation();
+};
+rootIntoShadow.onkeyup = (e) => {
+  e.stopImmediatePropagation();
+  e.stopPropagation();
+};
+
 const shadowRoot = root.attachShadow({ mode: "open" });
 
 shadowRoot.appendChild(rootIntoShadow);

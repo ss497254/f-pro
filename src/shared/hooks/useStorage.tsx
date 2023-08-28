@@ -2,11 +2,11 @@ import { useSyncExternalStore } from "react";
 import { BaseStorage } from "@src/shared/storages/base";
 
 type WrappedPromise = ReturnType<typeof wrapPromise>;
-const storageMap: Map<BaseStorage<unknown>, WrappedPromise> = new Map();
+const storageMap: Map<BaseStorage<any>, WrappedPromise> = new Map();
 
 export default function useStorage<
   Storage extends BaseStorage<Data>,
-  Data = Storage extends BaseStorage<infer Data> ? Data : unknown
+  Data = Storage extends BaseStorage<infer Data> ? Data : any
 >(storage: Storage) {
   const _data = useSyncExternalStore<Data | null>(
     storage.subscribe,

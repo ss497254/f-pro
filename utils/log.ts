@@ -17,7 +17,7 @@ export default function colorLog(message: string, type?: ColorType) {
       color = COLORS.FgYellow;
       break;
     default:
-      color = COLORS[type];
+      color = COLORS[type!];
       break;
   }
 
@@ -49,3 +49,4 @@ const COLORS = {
   BgCyan: "\x1b[46m",
   BgWhite: "\x1b[47m",
 } as const;
+

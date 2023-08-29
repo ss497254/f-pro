@@ -6,7 +6,7 @@ export default function BottomBar() {
   const { open } = useIsOpenStore();
 
   return (
-    <div className="flex bg-black text-white" style={{ height: open ? 30 : 0 }}>
+    <div className="flex" style={{ height: open ? 30 : 0 }}>
       <AuthBar />
       <DraggableCloseBtn />
     </div>

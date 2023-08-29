@@ -9,7 +9,7 @@ export function AuthBar() {
 
   return (
     <div
-      className="px-2 flex-grow"
+      className="px-2 flex-grow bg-black text-white"
       style={{
         display: open ? "block" : "none",
       }}

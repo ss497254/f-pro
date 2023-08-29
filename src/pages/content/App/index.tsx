@@ -8,15 +8,12 @@ refreshOnUpdate("pages/content");
 const root = document.createElement("div");
 const rootIntoShadow = document.createElement("div");
 
-root.id = "ad-blocker";
 root.draggable = true;
 root.style.position = "absolute";
 root.style.zIndex = "2147483647";
 root.style.top = "0";
 root.style.left = "0";
 root.style.right = "0";
-
-document.body.style.marginTop = "30px";
 
 rootIntoShadow.id = "shadow-root";
 rootIntoShadow.onkeydown = (e) => {
@@ -27,6 +24,26 @@ rootIntoShadow.onkeyup = (e) => {
   e.stopImmediatePropagation();
   e.stopPropagation();
 };
+
+document.addEventListener(
+  "keydown",
+  (() => {
+    let on = true;
+
+    return (e) => {
+      if (e.altKey && e.keyCode === 55) {
+        e.stopImmediatePropagation();
+        e.stopPropagation();
+
+        on = !on;
+        if (on) rootIntoShadow.style.opacity = "1";
+        else rootIntoShadow.style.opacity = "0";
+
+        return false;
+      }
+    };
+  })()
+);
 
 const shadowRoot = root.attachShadow({ mode: "open" });
 

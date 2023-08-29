@@ -53,13 +53,10 @@ export default defineConfig({
         entryFileNames: "src/[name].js",
         esModule: false,
         exports: "none",
-        chunkFileNames: "assets/js/[name].js",
-        // assetFileNames: (assetInfo) => {
-        //   const { dir, name: _name } = path.parse(assetInfo.name);
-        //   const assetFolder = dir.split("/").at(-1);
-        //   const name = assetFolder + "-" + _name;
-        //   return `assets/[ext]/${name}.[ext]`;
-        // },
+        chunkFileNames: "assets/js/[hash].js",
+        assetFileNames: () => {
+          return `assets/[ext]/[hash].[ext]`;
+        },
       },
     },
   },

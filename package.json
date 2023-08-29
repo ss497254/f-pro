@@ -1,7 +1,7 @@
 {
-  "name": "ad-blocker-pro",
+  "name": "utils-pro",
   "version": "1.0.0",
-  "description": "Pro ad blocker, that's actually not a ad blocker",
+  "description": "Add more functions to your browser",
   "scripts": {
     "build": "tsc --noEmit && vite build",
     "build:watch": "cross-env __DEV__=true vite build -w",
@@ -42,3 +42,4 @@
     "ws": "8.13.0"
   }
 }
+

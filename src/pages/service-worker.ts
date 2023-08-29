@@ -24,7 +24,7 @@ chrome.commands.onCommand.addListener(async (command) => {
   }
 
   if (InjectedTabs.has(res.id)) {
-    console.log("Script already injected in page", res.title, InjectedTabs);
+    console.log("Script already injected in page", res.title);
   } else {
     InjectedTabs.add(res.id);
 
@@ -34,11 +34,6 @@ chrome.commands.onCommand.addListener(async (command) => {
       files: ["src/content-script.js"],
     });
 
-    console.log(
-      "Script successfully injected in page",
-      res.title,
-      InjectedTabs
-    );
+    console.log("Script successfully injected in page", res.title);
   }
 });
-

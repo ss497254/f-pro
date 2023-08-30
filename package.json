@@ -1,7 +1,7 @@
 {
-  "name": "utils-pro",
+  "name": "f-pro",
   "version": "1.0.0",
-  "description": "Add more functions to your browser",
+  "description": "Chrome extension to add more features to your browser",
   "scripts": {
     "build": "tsc --noEmit && vite build",
     "build:watch": "cross-env __DEV__=true vite build -w",

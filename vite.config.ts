@@ -9,7 +9,7 @@ import manifest from "./manifest";
 
 const rootDir = resolve(__dirname);
 const srcDir = resolve(rootDir, "src");
-const pagesDir = resolve(srcDir, "pages");
+const appDir = resolve(srcDir, "app");
 const outDir = resolve(rootDir, "dist");
 const publicDir = resolve(rootDir, "public");
 
@@ -24,7 +24,7 @@ export default defineConfig({
     alias: {
       "@root": rootDir,
       "@src": srcDir,
-      "@pages": pagesDir,
+      "@app": appDir,
     },
   },
   plugins: [
@@ -45,9 +45,9 @@ export default defineConfig({
     reportCompressedSize: isProduction,
     rollupOptions: {
       input: {
-        "content-script": resolve(pagesDir, "content", "index.ts"),
-        "service-worker": resolve(pagesDir, "service-worker.ts"),
-        popup: resolve(pagesDir, "popup", "index.html"),
+        "content-script": resolve(srcDir, "content", "index.ts"),
+        "service-worker": resolve(srcDir, "service-worker.ts"),
+        popup: resolve(srcDir, "popup", "index.html"),
       },
       output: {
         entryFileNames: "src/[name].js",

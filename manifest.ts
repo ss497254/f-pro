@@ -19,7 +19,7 @@ const manifest: chrome.runtime.ManifestV3 = {
     type: "module",
   },
   action: {
-    default_popup: "src/pages/popup/index.html",
+    default_popup: "src/popup/index.html",
     default_icon: "icon48.png",
   },
   icons: {

@@ -15,8 +15,31 @@ root.style.top = "0";
 root.style.left = "0";
 root.style.right = "0";
 
+const hideFunction = (() => {
+  let on = true;
+
+  return (e: KeyboardEvent) => {
+    if (e.altKey && e.keyCode === 55) {
+      e.stopImmediatePropagation();
+      e.stopPropagation();
+
+      on = !on;
+      if (on) {
+        rootIntoShadow.style.opacity = "1";
+        root.style.zIndex = "2147483647";
+      } else {
+        rootIntoShadow.style.opacity = "0";
+        root.style.zIndex = "-2147483647";
+      }
+
+      return false;
+    }
+  };
+})();
+
 rootIntoShadow.id = "shadow-root";
 rootIntoShadow.onkeydown = (e) => {
+  hideFunction(e);
   e.stopImmediatePropagation();
   e.stopPropagation();
 };
@@ -25,30 +48,7 @@ rootIntoShadow.onkeyup = (e) => {
   e.stopPropagation();
 };
 
-document.addEventListener(
-  "keydown",
-  (() => {
-    let on = true;
-
-    return (e) => {
-      if (e.altKey && e.keyCode === 55) {
-        e.stopImmediatePropagation();
-        e.stopPropagation();
-
-        on = !on;
-        if (on) {
-          rootIntoShadow.style.opacity = "1";
-          root.style.zIndex = "2147483647";
-        } else {
-          rootIntoShadow.style.opacity = "0";
-          root.style.zIndex = "-2147483647";
-        }
-
-        return false;
-      }
-    };
-  })()
-);
+document.addEventListener("keydown", hideFunction);
 
 const shadowRoot = root.attachShadow({ mode: "open" });
 

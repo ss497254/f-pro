@@ -1,5 +1,5 @@
 {
-  "name": "f-pro",
+  "name": "features-pro",
   "version": "1.0.0",
   "description": "Chrome extension to add more features to your browser",
   "scripts": {
@@ -42,4 +42,3 @@
     "ws": "8.13.0"
   }
 }
-

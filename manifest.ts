@@ -6,11 +6,11 @@ const manifest: chrome.runtime.ManifestV3 = {
   version: packageJson.version,
   description: packageJson.description,
   commands: {
-    execute: {
+    inject: {
       suggested_key: {
-        default: "Alt+Shift+7",
+        default: "Alt+Shift+0",
       },
-      description: "execute",
+      description: "inject",
     },
   },
   permissions: ["storage", "scripting", "webNavigation"],
@@ -39,4 +39,3 @@ const manifest: chrome.runtime.ManifestV3 = {
 };
 
 export default manifest;
-

@@ -1,5 +1,4 @@
 {
-  "arrowParens": "always",
-  "endOfLine": "crlf"
+  "arrowParens": "always"
 }
 

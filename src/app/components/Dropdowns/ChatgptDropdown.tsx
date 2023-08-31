@@ -1,5 +1,6 @@
-import { ChatgptIcon } from "@app/icons";
+import { ChatgptIcon } from "@root/src/app/icons";
 import React, { useState } from "react";
+import { ChatScreen } from "../ChatScreen";
 
 interface ChatgptDropdownProps extends React.PropsWithChildren {}
 
@@ -9,21 +10,17 @@ export const ChatgptDropdown: React.FC<ChatgptDropdownProps> = ({}) => {
   return (
     <>
       <button
-        className="p-1.5 hover:bg-gray-800 transition duration-150"
-        aria-haspopup="true"
+        className="p-1.5 hover:bg-zinc-900 transition duration-150"
         onClick={() => setDropdownOpen(!dropdownOpen)}
-        aria-expanded={dropdownOpen}
       >
         <ChatgptIcon size={15} />
       </button>
       {dropdownOpen && (
-        <div className="z-50 absolute top-8 left-10 rounded-md bg-black overflow-hidden min-w-[480px]">
-          <ul>
-            <li className="border-t border-slate-200 p-3">A</li>
-          </ul>
-          <div className="font-semibold text-blue-600 border-t border-gray-300 py-2 px-4">
-            See More
-          </div>
+        <div
+          className="z-50 absolute border border-zinc-800 top-8 left-10 rounded-md bg-black overflow-hidden min-w-[480px] min-h-[480px] w-[480px] h-[480px]"
+          style={{ resize: "both" }}
+        >
+          <ChatScreen title="Music" />
         </div>
       )}
     </>

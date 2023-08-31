@@ -5,6 +5,10 @@ const startTime = new Date();
 
 console.log(`Service Worker is started on ${startTime.toLocaleString()}`);
 
+chrome.commands
+  .getAll()
+  .then((data) => console.log("Registerd commands:", ...data));
+
 const InjectedTabs = new Set<number>();
 const onPageReload = (
   e: chrome.webNavigation.WebNavigationFramedCallbackDetails
@@ -14,8 +18,7 @@ const onPageReload = (
 
 chrome.webNavigation.onCompleted.addListener(onPageReload);
 
-chrome.commands.onCommand.addListener(async (command) => {
-  console.log(`Command "${command}" triggered`);
+const injectContentScript = async () => {
   const [res] = await chrome.tabs.query({ active: true, currentWindow: true });
 
   if (!res || !res.id) {
@@ -36,4 +39,9 @@ chrome.commands.onCommand.addListener(async (command) => {
 
     console.log("Script successfully injected in page", res.title);
   }
+};
+
+chrome.commands.onCommand.addListener(async (command) => {
+  console.log(`Command "${command}" triggered`);
+  if (command === "inject") await injectContentScript();
 });

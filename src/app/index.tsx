@@ -8,14 +8,13 @@ import { attachTwindStyle } from "@src/shared/style/twind";
 const root = document.createElement("div");
 const rootIntoShadow = document.createElement("div");
 
-root.draggable = true;
 root.style.position = "absolute";
 root.style.zIndex = "2147483647";
 root.style.top = "0";
 root.style.left = "0";
 root.style.right = "0";
 
-const hideFunction = (() => {
+const listner = (() => {
   let on = true;
 
   return (e: KeyboardEvent) => {
@@ -39,7 +38,7 @@ const hideFunction = (() => {
 
 rootIntoShadow.id = "shadow-root";
 rootIntoShadow.onkeydown = (e) => {
-  hideFunction(e);
+  listner(e);
   e.stopImmediatePropagation();
   e.stopPropagation();
 };
@@ -48,7 +47,7 @@ rootIntoShadow.onkeyup = (e) => {
   e.stopPropagation();
 };
 
-document.addEventListener("keydown", hideFunction);
+document.addEventListener("keydown", listner);
 
 const shadowRoot = root.attachShadow({ mode: "open" });
 

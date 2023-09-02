@@ -28,7 +28,7 @@ rootIntoShadow.onkeydown = (e) => {
   stopEventPropagation(e);
 };
 rootIntoShadow.onkeyup = stopEventPropagation;
-rootIntoShadow.onclick = stopEventPropagation;
+rootIntoShadow.onclick = (e) => e.stopPropagation();
 
 document.addEventListener("keydown", listner);
 

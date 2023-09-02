@@ -1,14 +1,19 @@
-import { useIsOpenStore } from "@app/stores/useIsOpenStore";
 import { AuthBar } from "@app/components/AuthBar";
-import { DraggableCloseBtn } from "@app/components/DraggableCloseBtn";
+import { useIsOpenStore } from "@app/stores/useIsOpenStore";
+import { CloseIcon } from "../icons";
 
 export default function BottomBar() {
-  const { open } = useIsOpenStore();
+  const { open, toggleOpen } = useIsOpenStore();
 
   return (
-    <div className="flex" style={{ height: open ? 30 : 0 }}>
-      <AuthBar />
-      <DraggableCloseBtn />
+    <div className="flex h-6">
+      {open && <AuthBar />}
+      <button
+        className="h-6 w-6 p-1 bg-black hover:bg-zinc-900 text-white"
+        onClick={toggleOpen}
+      >
+        <CloseIcon size={20} />
+      </button>
     </div>
   );
 }

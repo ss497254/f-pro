@@ -3,6 +3,7 @@ reloadOnUpdate("background");
 
 import "./command";
 import "./inject-script";
+import "./messages";
 
 export const startTime = new Date();
 

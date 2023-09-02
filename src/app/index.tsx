@@ -1,55 +1,36 @@
 import refreshOnUpdate from "virtual:reload-on-update-in-view";
 refreshOnUpdate("app");
+refreshOnUpdate("background");
 
 import { createRoot } from "react-dom/client";
 import Main from "./components/Main";
+import { isScriptInjected } from "./lib/is-script-injected";
 import { attachTwindStyle } from "@src/shared/style/twind";
+import { keyboardListner } from "./lib/keyboard-listner";
+import { stopEventPropagation } from "./lib/stop-event-propagation";
+
+isScriptInjected();
 
 const root = document.createElement("div");
+
+const shadowRoot = root.attachShadow({ mode: "closed" });
 const rootIntoShadow = document.createElement("div");
+const listner = keyboardListner(rootIntoShadow);
 
-root.style.position = "absolute";
-root.style.zIndex = "2147483647";
-root.style.top = "0";
-root.style.left = "0";
-root.style.right = "0";
+rootIntoShadow.style.position = "absolute";
+rootIntoShadow.style.zIndex = "2147483647";
+rootIntoShadow.style.top = "0";
+rootIntoShadow.style.left = "0";
+rootIntoShadow.style.right = "0";
 
-const listner = (() => {
-  let on = true;
-
-  return (e: KeyboardEvent) => {
-    if (e.altKey && e.keyCode === 55) {
-      e.stopImmediatePropagation();
-      e.stopPropagation();
-
-      on = !on;
-      if (on) {
-        rootIntoShadow.style.opacity = "1";
-        root.style.zIndex = "2147483647";
-      } else {
-        rootIntoShadow.style.opacity = "0";
-        root.style.zIndex = "-2147483647";
-      }
-
-      return false;
-    }
-  };
-})();
-
-rootIntoShadow.id = "shadow-root";
 rootIntoShadow.onkeydown = (e) => {
   listner(e);
-  e.stopImmediatePropagation();
-  e.stopPropagation();
+  stopEventPropagation(e);
 };
-rootIntoShadow.onkeyup = (e) => {
-  e.stopImmediatePropagation();
-  e.stopPropagation();
-};
+rootIntoShadow.onkeyup = stopEventPropagation;
+rootIntoShadow.onclick = stopEventPropagation;
 
 document.addEventListener("keydown", listner);
-
-const shadowRoot = root.attachShadow({ mode: "open" });
 
 shadowRoot.appendChild(rootIntoShadow);
 document.body.append(root);

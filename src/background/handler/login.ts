@@ -16,5 +16,5 @@ export const handleLogin = async (data: {
 
   if (res.success) return res.data;
 
-  throw new Error(res.message || "Login error");
+  throw new Error(res.message);
 };

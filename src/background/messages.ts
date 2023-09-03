@@ -16,11 +16,10 @@ export const messageHandler = (
         password: message.p,
       })
         .then((user) => {
-          sendResponse({ type: "sucesss", ...user });
+          sendResponse({ type: "sucesss", user });
         })
         .catch((e) => sendResponse({ type: "error", message: e.message }));
 
-      console.log("returning");
       return true;
     }
     case "ping": {

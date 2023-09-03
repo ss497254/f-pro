@@ -1,4 +1,4 @@
-import React, { memo, useState } from "react";
+import React, { useState } from "react";
 import { useNotificationStore } from "../../stores/useNotificationsStore";
 import { Button } from "../Buttons";
 
@@ -10,27 +10,21 @@ export const NotificationsList: React.FC<NotificationsListProps> = () => {
   const isEmpty = notifications.length === 0,
     hasMore = notifications.length < limit;
 
+  if (isEmpty) return <div className="text-center py-12">No notifications</div>;
+
   return (
-    <div>
-      {isEmpty ? (
-        "No notifications"
-      ) : (
-        <>
-          {notifications.slice(0, limit).map(
-            memo((notification, idx) => (
-              <div key={idx} className="p-2">
-                <p>{notification.content}</p>
-                <span className="text-gray-800">
-                  {notification.timestamp.toTimeString()}
-                </span>
-              </div>
-            ))
-          )}
-          {hasMore && (
-            <Button onClick={() => setLimit(limit + 5)}>Load more</Button>
-          )}
-        </>
+    <>
+      {notifications.slice(0, limit).map((notification, idx) => (
+        <div key={idx} className="p-2">
+          <p>{notification.content}</p>
+          <span className="text-gray-800">
+            {notification.timestamp.toTimeString()}
+          </span>
+        </div>
+      ))}
+      {hasMore && (
+        <Button onClick={() => setLimit(limit + 5)}>Load more</Button>
       )}
-    </div>
+    </>
   );
 };

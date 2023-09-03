@@ -1,5 +1,6 @@
 import { NotificationIcon } from "@root/src/app/icons";
 import React, { useState } from "react";
+import { NotificationsList } from "@app/ui/Notifications/NotificationsList";
 
 interface NotificationsDropdownProps extends React.PropsWithChildren {}
 
@@ -17,8 +18,8 @@ export const NotificationsDropdown: React.FC<
         <NotificationIcon size={15} />
       </button>
       {dropdownOpen && (
-        <div className="z-50 absolute  border border-zinc-800 top-8 right-16 rounded-md bg-black overflow-hidden w-[360px] min-h-[360px]">
-          Notifications
+        <div className="z-50 absolute border border-zinc-800 top-8 left-16 p-2 rounded-md bg-black overflow-hidden w-[360px]">
+          <NotificationsList />
         </div>
       )}
     </>

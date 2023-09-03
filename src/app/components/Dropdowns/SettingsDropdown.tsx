@@ -15,7 +15,7 @@ export const SettingsDropdown: React.FC<SettingsDropdownProps> = ({}) => {
         <SettingsIcon size={15} />
       </button>
       {dropdownOpen && (
-        <div className="z-50 absolute border border-zinc-800 top-8 right-9 rounded bg-black overflow-hidden w-[360px] min-h-[360px]">
+        <div className="z-50 absolute border border-zinc-800 top-8 left-24 rounded-md bg-black overflow-hidden w-[360px]">
           Settings
         </div>
       )}

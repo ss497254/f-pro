@@ -28,8 +28,11 @@ export const LoginBar: React.FC<LoginBarProps> = () => {
 
           if (res?.user) update("user", res.user);
           else throw new Error(res?.message || "Login error");
-        } catch (e) {
-          addNotification({ content: JSON.stringify(e), type: "error" });
+        } catch (e: any) {
+          addNotification({
+            content: e.message,
+            type: "error",
+          });
           setError(true);
         } finally {
           setLoading(false);

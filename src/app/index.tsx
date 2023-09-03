@@ -1,6 +1,5 @@
 import refreshOnUpdate from "virtual:reload-on-update-in-view";
 refreshOnUpdate("app");
-refreshOnUpdate("background");
 
 import { createRoot } from "react-dom/client";
 import Main from "./components/Main";

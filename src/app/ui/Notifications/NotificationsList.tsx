@@ -8,7 +8,7 @@ export const NotificationsList: React.FC<NotificationsListProps> = () => {
   const { notifications } = useNotificationStore();
   const [limit, setLimit] = useState(5);
   const isEmpty = notifications.length === 0,
-    hasMore = notifications.length < limit;
+    hasMore = notifications.length > limit;
 
   if (isEmpty) return <div className="text-center py-12">No notifications</div>;
 
@@ -16,14 +16,16 @@ export const NotificationsList: React.FC<NotificationsListProps> = () => {
     <>
       {notifications.slice(0, limit).map((notification, idx) => (
         <div key={idx} className="p-2">
-          <p>{notification.content}</p>
-          <span className="text-gray-800">
+          <p className="pb-1">{notification.content}</p>
+          <span className="text-gray-300 text-xs">
             {notification.timestamp.toTimeString()}
           </span>
         </div>
       ))}
       {hasMore && (
-        <Button onClick={() => setLimit(limit + 5)}>Load more</Button>
+        <Button onClick={() => setLimit(limit + 5)} className="mx-auto mt-2">
+          Load more
+        </Button>
       )}
     </>
   );

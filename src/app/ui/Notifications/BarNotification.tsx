@@ -20,9 +20,6 @@ export const BarNotification: React.FC<BarNotificationProps> = () => {
 
   if (hide) return null;
 
-  if (typeof notification["content"] !== "string")
-    notification.content = notification.content + "";
-
   return (
     <div
       title={notification.content}
@@ -31,7 +28,7 @@ export const BarNotification: React.FC<BarNotificationProps> = () => {
         notification.type === "info" ? "text-blue-600" : "text-red-600",
       ].join(" ")}
     >
-      {notification.content}
+      {notification.content + ""}
     </div>
   );
 };

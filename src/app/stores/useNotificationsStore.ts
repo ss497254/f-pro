@@ -13,8 +13,8 @@ export const useNotificationStore = create<NotificationStoreState>()((set) => ({
   addNotification: (notification) =>
     set((state) => ({
       notifications: [
-        ...state.notifications,
         { ...notification, timestamp: new Date() },
+        ...state.notifications,
       ],
     })),
   updateNotification: (t) =>

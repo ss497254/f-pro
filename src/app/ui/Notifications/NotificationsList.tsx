@@ -15,8 +15,13 @@ export const NotificationsList: React.FC<NotificationsListProps> = () => {
   return (
     <>
       {notifications.slice(0, limit).map((notification, idx) => (
-        <div key={idx} className="p-2">
+        <div key={idx} className="p-2 border-b border-zinc-900">
           <p className="pb-1">{notification.content}</p>
+          {notification.extra && (
+            <p className="pb-1 text-sm text-gray-200">
+              {JSON.stringify(notification.extra)}
+            </p>
+          )}
           <span className="text-gray-300 text-xs">
             {notification.timestamp.toTimeString()}
           </span>

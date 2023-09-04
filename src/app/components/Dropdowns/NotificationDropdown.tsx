@@ -18,7 +18,7 @@ export const NotificationsDropdown: React.FC<
         <NotificationIcon size={15} />
       </button>
       {dropdownOpen && (
-        <div className="z-50 absolute border border-zinc-800 top-8 left-16 p-2 pr-1 rounded-md overflow-y-scroll [&::-webkit-scrollbar]:w-1 [&::-webkit-scrollbar-thumb]:bg-zinc-900 [&::-webkit-scrollbar-thumb]:rounded-sm bg-black w-[360px] max-h-[360px]">
+        <div className="z-50 absolute border border-zinc-800 top-8 left-16 p-2 pr-1 rounded-md overflow-y-scroll break-words [&::-webkit-scrollbar]:w-1 [&::-webkit-scrollbar-thumb]:bg-zinc-900 [&::-webkit-scrollbar-thumb]:rounded-sm bg-black w-[360px] max-h-[360px]">
           <NotificationsList />
         </div>
       )}

@@ -24,11 +24,11 @@ export const BarNotification: React.FC<BarNotificationProps> = () => {
     <div
       title={notification.content}
       className={[
-        "h-6 px-3 bg-zinc-900 w-80 flex items-center text-xs overflow-hidden",
+        "h-6 px-3 bg-zinc-900 w-80 flex items-center text-xs truncate",
         notification.type === "info" ? "text-blue-600" : "text-red-600",
       ].join(" ")}
     >
-      {notification.content + ""}
+      {notification.content}
     </div>
   );
 };

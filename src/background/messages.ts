@@ -1,4 +1,5 @@
 import { handleLogin } from "./handler/login";
+import { getPortName } from "./utils/port";
 
 export const messageHandler = (
   message: any,
@@ -15,8 +16,12 @@ export const messageHandler = (
         username: message.u,
         password: message.p,
       })
-        .then((user) => {
-          sendResponse({ type: "sucesss", user });
+        .then(({ user }) => {
+          sendResponse({
+            type: "success",
+            user,
+            port: getPortName(),
+          });
         })
         .catch((e) => sendResponse({ type: "error", message: e.message }));
 

@@ -1,6 +1,6 @@
 import * as React from "react";
 
-export function ChatIcon(
+export function ZonicIcon(
   props: React.SVGProps<SVGSVGElement> & { size?: number }
 ) {
   return (

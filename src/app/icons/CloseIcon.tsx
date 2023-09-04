@@ -15,7 +15,7 @@ export function CloseIcon(
       <path
         d="M6 18L18 6M6 6L18 18"
         stroke="currentColor"
-        strokeWidth="2"
+        strokeWidth="3"
         strokeLinecap="round"
         strokeLinejoin="round"
       />

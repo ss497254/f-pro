@@ -1,6 +1,6 @@
 import * as React from "react";
 
-export function ChatgptIcon(
+export function MusicIcon(
   props: React.SVGProps<SVGSVGElement> & { size?: number }
 ) {
   return (

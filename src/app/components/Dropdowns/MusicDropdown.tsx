@@ -1,10 +1,10 @@
-import { ChatgptIcon } from "@root/src/app/icons";
+import { MusicIcon } from "@root/src/app/icons";
 import React, { useState } from "react";
 import { ChatScreen } from "../ChatScreen";
 
-interface ChatgptDropdownProps extends React.PropsWithChildren {}
+interface MusicDropdownProps extends React.PropsWithChildren {}
 
-export const ChatgptDropdown: React.FC<ChatgptDropdownProps> = ({}) => {
+export const MusicDropdown: React.FC<MusicDropdownProps> = ({}) => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
   return (
@@ -13,14 +13,14 @@ export const ChatgptDropdown: React.FC<ChatgptDropdownProps> = ({}) => {
         className="p-1.5 hover:bg-zinc-900 transition duration-150"
         onClick={() => setDropdownOpen(!dropdownOpen)}
       >
-        <ChatgptIcon size={15} />
+        <MusicIcon size={15} />
       </button>
       {dropdownOpen && (
         <div
-          className="z-50 absolute border border-zinc-800 top-8 left-10 rounded-md bg-black overflow-hidden min-w-[480px] min-h-[480px] w-[480px] h-[480px]"
+          className="z-50 fixed border border-zinc-800 top-8 left-10 rounded-md bg-black overflow-hidden min-w-[480px] min-h-[480px] w-[480px] h-[480px]"
           style={{ resize: "both" }}
         >
-          <ChatScreen title="Music" />
+          <ChatScreen channel="music" />
         </div>
       )}
     </>

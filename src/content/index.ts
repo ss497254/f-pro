@@ -1,4 +1,1 @@
-export {};
-
 import("../app");
-

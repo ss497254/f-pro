@@ -1,14 +1,13 @@
+import { useNotificationStore } from "@app/stores/useNotificationsStore";
 import { BlockButton } from "@app/ui/Buttons";
+import { handleLogin } from "@root/src/app/lib/auth";
 import React, { useState } from "react";
-import { useConfigStore } from "../stores/useConfigStore";
-import { useNotificationStore } from "../stores/useNotificationsStore";
 
 interface LoginBarProps extends React.PropsWithChildren {}
 
 export const LoginBar: React.FC<LoginBarProps> = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
-  const { update } = useConfigStore();
   const { addNotification } = useNotificationStore();
 
   return (
@@ -24,10 +23,7 @@ export const LoginBar: React.FC<LoginBarProps> = () => {
         const { value: p } = form.elements.namedItem("p") as HTMLInputElement;
 
         try {
-          const res = await chrome.runtime.sendMessage({ type: "login", u, p });
-
-          if (res?.user) update("user", res.user);
-          else throw new Error(res?.message || "Login error");
+          await handleLogin({ u, p });
         } catch (e: any) {
           addNotification({
             content: e.message,

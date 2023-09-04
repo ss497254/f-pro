@@ -1,12 +1,14 @@
 import React from "react";
-import { useConfigStore } from "../stores/useConfigStore";
-import { useNotificationStore } from "../stores/useNotificationsStore";
+import { useConfigStore } from "@app/stores/useConfigStore";
+import { useNotificationStore } from "@app/stores/useNotificationsStore";
+import { handleLogout } from "@app/lib/auth";
 
 interface SettingsProps extends React.PropsWithChildren {}
 
 export const Settings: React.FC<SettingsProps> = () => {
-  const { update, user } = useConfigStore();
+  const { user } = useConfigStore();
   const { addNotification } = useNotificationStore();
+
   return (
     <>
       <div className="px-2 pb-1">
@@ -25,7 +27,7 @@ export const Settings: React.FC<SettingsProps> = () => {
         New Notification
       </div>
       <div
-        onClick={() => update("user", undefined)}
+        onClick={handleLogout}
         className="bg-red-500 text-white rounded-md px-3 py-2 text-center"
       >
         Logout

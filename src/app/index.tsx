@@ -3,12 +3,12 @@ refreshOnUpdate("app");
 
 import { createRoot } from "react-dom/client";
 import Main from "./components/Main";
-import { isScriptInjected } from "./lib/is-script-injected";
+import { isScriptAlive } from "./lib/is-script-alive";
 import { attachTwindStyle } from "@src/shared/style/twind";
 import { keyboardListner } from "./lib/keyboard-listner";
 import { stopEventPropagation } from "./lib/stop-event-propagation";
 
-isScriptInjected();
+isScriptAlive();
 
 const root = document.createElement("div");
 

@@ -37,13 +37,13 @@ export const LoginBar: React.FC<LoginBarProps> = () => {
     >
       <input
         required
-        className="px-2 h-6 bg-zinc-900 outline-none"
+        className="px-2 h-6 bg-surface2 outline-none"
         name="u"
         placeholder="u"
       />
       <input
         required
-        className="px-2 h-6 bg-zinc-900 outline-none"
+        className="px-2 h-6 bg-surface2 outline-none"
         name="p"
         placeholder="p"
       />

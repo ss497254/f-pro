@@ -10,16 +10,13 @@ export const MusicDropdown: React.FC<MusicDropdownProps> = ({}) => {
   return (
     <>
       <button
-        className="p-1.5 hover:bg-zinc-900 transition duration-150"
+        className="p-1.5 hover:bg-surface2 transition duration-150"
         onClick={() => setDropdownOpen(!dropdownOpen)}
       >
         <MusicIcon size={15} />
       </button>
       {dropdownOpen && (
-        <div
-          className="z-50 fixed border border-zinc-800 top-8 left-10 rounded-md bg-black overflow-hidden min-w-[480px] min-h-[480px] w-[480px] h-[480px]"
-          style={{ resize: "both" }}
-        >
+        <div className="z-50 fixed border border-surface3 top-8 left-10 rounded-md resize bg-surface1 overflow-hidden min-w-[480px] min-h-[480px] w-[480px] h-[480px]">
           <ChatScreen channel="music" />
         </div>
       )}

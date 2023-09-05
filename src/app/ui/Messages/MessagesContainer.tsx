@@ -1,8 +1,8 @@
 import { useScrollToBottom } from "@app/hooks/useScrollToBottom";
+import { useConfigStore } from "@app/stores/useConfigStore";
 import { Spinner } from "@app/ui/Spinner";
 import { getMessageStore } from "@root/src/app/lib/getMessageStore";
-import React, { useEffect } from "react";
-import { useConfigStore } from "@app/stores/useConfigStore";
+import React from "react";
 import { Button } from "../Buttons";
 import { MessageBox } from "./MessageBox";
 
@@ -21,7 +21,7 @@ export const MessagesContainer: React.FC<MessagesContainerProps> = ({
       ref={ref}
     >
       <OldMessagesList channel={channel} />
-      <NewMessagesList channel={channel} onUpdate={scroll} />
+      <NewMessagesList channel={channel} scroll={scroll} />
     </div>
   );
 };
@@ -54,13 +54,12 @@ export const OldMessagesList: React.FC<{ channel: string }> = ({ channel }) => {
 
 export const NewMessagesList: React.FC<{
   channel: string;
-  onUpdate: () => void;
-}> = ({ channel, onUpdate }) => {
+  scroll: () => void;
+}> = ({ channel, scroll }) => {
   const { username } = useConfigStore((state) => state.user)!;
   const newMessages = getMessageStore(channel)((state) => state.newMessages);
 
-  useEffect(onUpdate, [newMessages]);
-
+  scroll();
   return (
     <>
       {newMessages.map((x) => (

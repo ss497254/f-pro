@@ -1,12 +1,10 @@
-import refreshOnUpdate from "virtual:reload-on-update-in-view";
-refreshOnUpdate("app");
-
-import { createRoot } from "react-dom/client";
-import Main from "./components/Main";
-import { isScriptAlive } from "./lib/is-script-alive";
+import Main from "@app/components/Main";
+import { isScriptAlive } from "@app/lib/is-script-alive";
+import { keyboardListner } from "@app/lib/keyboard-listner";
+import { stopEventPropagation } from "@app/lib/stop-event-propagation";
+import { addStyles } from "@app/style";
 import { attachTwindStyle } from "@src/shared/style/twind";
-import { keyboardListner } from "./lib/keyboard-listner";
-import { stopEventPropagation } from "./lib/stop-event-propagation";
+import { createRoot } from "react-dom/client";
 
 isScriptAlive();
 
@@ -16,11 +14,7 @@ const shadowRoot = root.attachShadow({ mode: "closed" });
 const rootIntoShadow = document.createElement("div");
 const listner = keyboardListner(rootIntoShadow);
 
-rootIntoShadow.style.position = "absolute";
-rootIntoShadow.style.zIndex = "2147483647";
-rootIntoShadow.style.top = "0";
-rootIntoShadow.style.left = "0";
-rootIntoShadow.style.right = "0";
+addStyles(rootIntoShadow);
 
 rootIntoShadow.onkeydown = (e) => {
   listner(e);

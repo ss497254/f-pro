@@ -6,7 +6,9 @@ export interface IMessageStore {
   oldMessages: IMessage[];
   channel: string;
   isLoading: boolean;
+  isSubmitting: boolean;
   addMessage: (content: string) => void;
+  loadOldMessages: () => void;
   clearMessages: () => void;
 }
 
@@ -23,20 +25,32 @@ export const getMessageStore = (channel: string) => {
     channel,
     oldMessages: [],
     isLoading: false,
+    isSubmitting: false,
     addMessage: async (content) => {
-      set({ isLoading: true });
+      set({ isSubmitting: true });
       const newMessage: IMessage = {
-        author: "Admin",
+        username: "ss497254",
         content,
         timestamp: new Date().getTime(),
       };
       set((state) => ({
         newMessages: [...state.newMessages, newMessage],
-        isLoading: false,
+        isSubmitting: false,
       }));
     },
+    loadOldMessages: async () => {
+      set({ isLoading: true });
+      await new Promise((res) => setTimeout(res, 2000));
+
+      set({ isLoading: false });
+    },
     clearMessages: () =>
-      set({ newMessages: [], oldMessages: [], isLoading: false }),
+      set({
+        newMessages: [],
+        oldMessages: [],
+        isSubmitting: false,
+        isLoading: true,
+      }),
   }));
 
   MessageStoreMap.set(channel, store);

@@ -33,7 +33,6 @@ export * from "./SendIcon";
 export * from "./SettingsIcon";
 export * from "./ShareIcon";
 export * from "./SortIcon";
-export * from "./Spinner";
 export * from "./SyncIcon";
 export * from "./ThreeDotsIcon";
 export * from "./TickIcon";

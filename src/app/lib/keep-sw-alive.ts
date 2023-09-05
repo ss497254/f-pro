@@ -4,9 +4,8 @@ let active = true,
 const keepSWAlive = async () => {
   if (!active) return;
 
-  const [type] = await chrome.runtime.sendMessage({ type: "ping" });
+  const { type } = await chrome.runtime.sendMessage({ type: "ping" });
 
-  console.log("keep sw alive", type);
   if (type !== "pong") {
     keepSWAlive();
     return;

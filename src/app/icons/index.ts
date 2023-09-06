@@ -5,6 +5,7 @@ export * from "./CaretIcon";
 export * from "./CaretRightIcon";
 export * from "./CloseIcon";
 export * from "./CommentsIcon";
+export * from "./DarkModeIcon";
 export * from "./DashboardIcon";
 export * from "./EditIcon";
 export * from "./FilterIcon";

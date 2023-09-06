@@ -2,8 +2,8 @@ import { useScrollToBottom } from "@app/hooks/useScrollToBottom";
 import { useConfigStore } from "@app/stores/useConfigStore";
 import { Spinner } from "@app/ui/Spinner";
 import { getMessageStore } from "@root/src/app/lib/getMessageStore";
-import React from "react";
-import { Button } from "../Buttons";
+import React, { useEffect } from "react";
+import { BlockButton } from "../Buttons";
 import { MessageBox } from "./MessageBox";
 
 interface MessagesContainerProps extends React.PropsWithChildren {
@@ -16,10 +16,7 @@ export const MessagesContainer: React.FC<MessagesContainerProps> = ({
   const { ref, scroll } = useScrollToBottom();
 
   return (
-    <div
-      className="flex-grow overflow-auto p-1.5 [&::-webkit-scrollbar]:w-1.5 [&::-webkit-scrollbar-thumb]:bg-surface2 [&::-webkit-scrollbar-thumb]:rounded"
-      ref={ref}
-    >
+    <div className="flex-grow overflow-auto p-1.5" ref={ref}>
       <OldMessagesList channel={channel} />
       <NewMessagesList channel={channel} scroll={scroll} />
     </div>
@@ -38,7 +35,9 @@ export const OldMessagesList: React.FC<{ channel: string }> = ({ channel }) => {
         {isLoading ? (
           <Spinner size={30} />
         ) : (
-          <Button onClick={loadOldMessages}>Load previous messages</Button>
+          <BlockButton className="py-2 rounded-md" onClick={loadOldMessages}>
+            Load previous messages
+          </BlockButton>
         )}
       </div>
       {oldMessages.map((x) => (
@@ -59,7 +58,8 @@ export const NewMessagesList: React.FC<{
   const { username } = useConfigStore((state) => state.user)!;
   const newMessages = getMessageStore(channel)((state) => state.newMessages);
 
-  scroll();
+  useEffect(scroll, [newMessages]);
+
   return (
     <>
       {newMessages.map((x) => (

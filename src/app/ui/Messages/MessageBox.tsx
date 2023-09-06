@@ -6,8 +6,8 @@ interface props extends IMessage {
 }
 
 const dirClassNames = {
-  left: "mr-auto bg-surface2",
-  right: "ml-auto bg-indigo-900",
+  left: "mr-auto",
+  right: "ml-auto",
 };
 
 export const MessageBox: React.FC<props> = ({ content, dir, timestamp }) => {
@@ -16,7 +16,7 @@ export const MessageBox: React.FC<props> = ({ content, dir, timestamp }) => {
   return (
     <div
       className={[
-        "max-w-[80%] p-3 whitespace-pre-wrap mx-3 my-1.5 relative rounded-md outline-none",
+        "max-w-[80%] p-3 whitespace-pre-wrap bg-surface2 mx-3 my-1.5 relative rounded-md outline-none",
         dirClassNames[dir],
       ].join(" ")}
     >

@@ -4,6 +4,7 @@ import { ZonicDropdown } from "@root/src/app/components/Dropdowns/ZonicDropdown"
 import { MusicDropdown } from "@root/src/app/components/Dropdowns/MusicDropdown";
 import { NotificationsDropdown } from "@app/components/Dropdowns/NotificationDropdown";
 import { useConfigStore } from "@app/stores/useConfigStore";
+import { ChangeColorModeBtn } from "./ChangeColorModeBtn";
 
 interface ContentBarProps extends React.PropsWithChildren {}
 
@@ -23,6 +24,7 @@ export const ContentBar: React.FC<ContentBarProps> = () => {
       })}
       <NotificationsDropdown />
       <SettingsDropdown />
+      <ChangeColorModeBtn />
     </div>
   );
 };

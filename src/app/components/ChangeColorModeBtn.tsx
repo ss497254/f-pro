@@ -1,5 +1,5 @@
-import { DarkModeIcon } from "../icons";
-import { changeColorMode } from "../lib/change-style";
+import { DarkModeIcon } from "@app/icons";
+import { changeColorMode } from "@app/lib/change-theme";
 
 export const ChangeColorModeBtn = () => {
   return (

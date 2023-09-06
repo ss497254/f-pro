@@ -1,4 +1,4 @@
-import { setDarkMode } from "./lib/change-style";
+import { setDarkMode } from "./lib/change-theme";
 
 export const addStyles = (element: HTMLDivElement) => {
   setDarkMode();

@@ -10,7 +10,7 @@ export const BlockButton = ({
   ...props
 }: ButtonProps) => {
   const classes = [
-    "relative flex items-center outline-none focus:border focus:border-surface4 px-3 justify-center bg-surface2 hover:bg-surface3 text-white",
+    "relative flex items-center outline-none focus:border focus:border-surface4 px-3 justify-center bg-surface2 hover:bg-surface3 text-color1",
   ];
 
   if (className) {

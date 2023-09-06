@@ -1,9 +1,7 @@
+import { setDarkMode } from "./lib/change-style";
+
 export const addStyles = (element: HTMLDivElement) => {
-  element.style.setProperty("--surface1", "#0f0f0f");
-  element.style.setProperty("--surface2", "#212121");
-  element.style.setProperty("--surface3", "#313131");
-  element.style.setProperty("--surface4", "#313131");
-  element.style.setProperty("--surface5", "#414141");
+  setDarkMode();
 
   element.style.position = "absolute";
   element.style.zIndex = "2147483647";

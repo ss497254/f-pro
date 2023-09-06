@@ -11,7 +11,7 @@ export const BarNotification: React.FC<BarNotificationProps> = () => {
     if (!notification) return;
 
     if (hide) setHide(!notification);
-    const timeout = setTimeout(setHide, 5000, true);
+    const timeout = setTimeout(setHide, 10000, true);
 
     return () => {
       clearTimeout(timeout);
@@ -24,7 +24,7 @@ export const BarNotification: React.FC<BarNotificationProps> = () => {
     <div
       title={notification.content}
       className={[
-        "h-6 px-3 bg-zinc-900 w-80 flex items-center text-xs truncate",
+        "h-6 px-3 bg-surface2 w-96 flex items-center text-xs truncate",
         notification.type === "info" ? "text-blue-600" : "text-red-600",
       ].join(" ")}
     >

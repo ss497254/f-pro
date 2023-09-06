@@ -6,6 +6,7 @@ import { useNotificationStore } from "@app/stores/useNotificationsStore";
 import { addStyles } from "@app/style";
 import { attachTwindStyle } from "@src/shared/style/twind";
 import { createRoot } from "react-dom/client";
+import { setRootElement } from "./lib/root-element";
 
 isScriptAlive();
 
@@ -15,6 +16,7 @@ const shadowRoot = root.attachShadow({ mode: "closed" });
 const rootIntoShadow = document.createElement("div");
 const listner = keyboardListner(rootIntoShadow);
 
+setRootElement(rootIntoShadow);
 addStyles(rootIntoShadow);
 
 rootIntoShadow.onkeydown = (e) => {

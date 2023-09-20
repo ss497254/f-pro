@@ -3,24 +3,21 @@
   "version": "1.0.0",
   "description": "Chrome extension to add more features to your browser",
   "scripts": {
-    "build": "tsc --noEmit && vite build",
-    "build:watch": "cross-env __DEV__=true vite build -w",
-    "build:hmr": "rollup --config utils/reload/rollup.config.ts",
-    "wss": "node utils/reload/initReloadServer.js",
-    "dev": "npm run build:hmr && (run-p wss build:watch)"
+    "build": "npm run manifest && webpack",
+    "manifest": "tsc --resolveJsonModule --esModuleInterop manifest.ts && node manifest.js",
+    "dev": "npm run manifest && webpack-dev-server"
   },
   "type": "module",
   "dependencies": {
-    "construct-style-sheets-polyfill": "^3.1.0",
-    "npm-run-all": "^4.1.5",
+    "eventemitter2": "^6.4.9",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "react-transition-group": "^4.4.5",
     "zustand": "^4.4.1"
   },
   "devDependencies": {
-    "@rollup/plugin-typescript": "^8.5.0",
-    "@testing-library/react": "13.4.0",
+    "@babel/preset-env": "^7.20.2",
+    "@babel/preset-react": "^7.18.6",
+    "@pmmmwh/react-refresh-webpack-plugin": "^0.5.10",
     "@twind/core": "^1.1.3",
     "@twind/preset-autoprefix": "^1.0.7",
     "@twind/preset-tailwind": "^1.1.4",
@@ -28,17 +25,17 @@
     "@types/node": "^18.15.11",
     "@types/react": "18.0.21",
     "@types/react-dom": "18.2.4",
-    "@types/react-transition-group": "^4.4.6",
-    "@types/ws": "^8.5.4",
-    "@vitejs/plugin-react": "2.2.0",
-    "chokidar": "^3.5.3",
-    "cross-env": "^7.0.3",
-    "fs-extra": "11.1.0",
-    "rollup": "2.79.1",
-    "sass": "1.62.1",
+    "babel-core": "^6.26.3",
+    "babel-loader": "^9.1.2",
+    "babel-preset-env": "^1.7.0",
+    "clean-webpack-plugin": "^4.0.0",
+    "copy-webpack-plugin": "^11.0.0",
+    "react-refresh-typescript": "^2.0.9",
+    "terser-webpack-plugin": "^5.3.9",
     "ts-loader": "9.4.2",
     "typescript": "4.8.4",
-    "vite": "3.1.3",
-    "ws": "8.13.0"
+    "webpack": "^5.76.1",
+    "webpack-cli": "^5.1.4",
+    "webpack-dev-server": "^4.15.1"
   }
 }

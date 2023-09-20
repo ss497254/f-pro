@@ -1,8 +1,8 @@
 import React from "react";
-import { useConfigStore } from "@app/stores/useConfigStore";
-import { useNotificationStore } from "@app/stores/useNotificationsStore";
-import { handleLogout } from "@app/lib/auth";
-import { Button } from "@app/ui/Buttons";
+import { useConfigStore } from "app/stores/useConfigStore";
+import { useNotificationStore } from "app/stores/useNotificationsStore";
+import { handleLogout } from "app/lib/auth";
+import { Button } from "app/ui/Buttons";
 
 interface SettingsProps extends React.PropsWithChildren {}
 

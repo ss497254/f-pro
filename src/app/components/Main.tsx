@@ -1,6 +1,6 @@
-import { AuthBar } from "@app/components/AuthBar";
-import { useIsOpenStore } from "@app/stores/useIsOpenStore";
-import { CloseIcon } from "@app/icons";
+import { AuthBar } from "app/components/AuthBar";
+import { useIsOpenStore } from "app/stores/useIsOpenStore";
+import { CloseIcon } from "app/icons";
 
 export default function BottomBar() {
   const { open, toggleOpen } = useIsOpenStore();

@@ -1,10 +1,10 @@
-import Main from "@app/components/Main";
-import { isScriptAlive } from "@app/lib/is-script-alive";
-import { keyboardListner } from "@app/lib/keyboard-listner";
-import { stopEventPropagation } from "@app/lib/stop-event-propagation";
-import { useNotificationStore } from "@app/stores/useNotificationsStore";
-import { addStyles } from "@app/style";
-import { attachTwindStyle } from "@src/shared/style/twind";
+import Main from "app/components/Main";
+import { isScriptAlive } from "app/lib/is-script-alive";
+import { keyboardListner } from "app/lib/keyboard-listner";
+import { stopEventPropagation } from "app/lib/stop-event-propagation";
+import { useNotificationStore } from "app/stores/useNotificationsStore";
+import { addStyles } from "app/style";
+import { attachTwindStyle } from "src/shared/style/twind";
 import { createRoot } from "react-dom/client";
 import { setRootElement } from "./lib/root-element";
 

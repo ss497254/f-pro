@@ -1,6 +1,6 @@
-import { NotificationIcon } from "@root/src/app/icons";
+import { NotificationIcon } from "src/app/icons";
 import React, { useState } from "react";
-import { NotificationsList } from "@app/ui/Notifications/NotificationsList";
+import { NotificationsList } from "app/ui/Notifications/NotificationsList";
 
 interface NotificationsDropdownProps extends React.PropsWithChildren {}
 

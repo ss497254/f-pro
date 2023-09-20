@@ -1,4 +1,4 @@
-import { SettingsIcon } from "@root/src/app/icons";
+import { SettingsIcon } from "src/app/icons";
 import React, { useState } from "react";
 import { Settings } from "../Settings";
 

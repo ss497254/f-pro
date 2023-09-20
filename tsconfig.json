@@ -25,11 +25,8 @@
     "forceConsistentCasingInFileNames": true,
     "typeRoots": ["./src/global.d.ts", "./node_modules/@types"],
     "paths": {
-      "@root/*": ["./*"],
-      "@app/*": ["src/app/*"],
-      "@src/*": ["src/*"],
-      "virtual:reload-on-update-in-background-script": ["./src/global.d.ts"],
-      "virtual:reload-on-update-in-view": ["./src/global.d.ts"]
+      "app/*": ["src/app/*"],
+      "src/*": ["src/*"]
     }
   },
   "include": ["src"]

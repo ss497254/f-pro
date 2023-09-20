@@ -1,6 +1,5 @@
 import { twind, cssom, observe } from "@twind/core";
-import "construct-style-sheets-polyfill";
-import config from "@root/twind.config";
+import config from "../../../twind.config";
 
 const customStyles = `
 ::-webkit-scrollbar {

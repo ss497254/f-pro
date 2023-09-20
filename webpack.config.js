@@ -23,14 +23,13 @@ module.exports = {
   resolve: {
     extensions: [".tsx", ".ts", ".js"],
     alias: {
-      "@root": path.resolve(__dirname),
-      "@src": path.resolve(__dirname, "src"),
-      "@app": path.resolve(__dirname, "src", "app"),
+      src: path.resolve(__dirname, "src"),
+      app: path.resolve(__dirname, "src", "app"),
     },
   },
   entry: {
     "service-worker": path.resolve(__dirname, "src", "service-worker.ts"),
-    "content-script": path.resolve(__dirname, "src", "content-script.js"),
+    "content-script": path.resolve(__dirname, "src", "content-script.ts"),
     popup: path.resolve(__dirname, "src", "popup", "index.tsx"),
   },
   output: {

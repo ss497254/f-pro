@@ -1,3 +1,4 @@
+import { clearChannelStores } from "../stores/getChannelStore";
 import { useConfigStore } from "../stores/useConfigStore";
 import { startScript, stopScript } from "./keep-sw-alive";
 import { connectPort, disconnectPort } from "./port";
@@ -18,6 +19,7 @@ export const handleLogin = async ({ u, p }: any) => {
 
 export const handleLogout = () => {
   useConfigStore.getState().update("user", undefined);
+  clearChannelStores();
   disconnectPort();
   stopScript();
 };

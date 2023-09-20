@@ -1,6 +1,6 @@
-import { useNotificationStore } from "@app/stores/useNotificationsStore";
-import { BlockButton } from "@app/ui/Buttons";
-import { handleLogin } from "@root/src/app/lib/auth";
+import { useNotificationStore } from "app/stores/useNotificationsStore";
+import { BlockButton } from "app/ui/Buttons";
+import { handleLogin } from "app/lib/auth";
 import React, { useState } from "react";
 
 interface LoginBarProps extends React.PropsWithChildren {}
@@ -12,7 +12,7 @@ export const LoginBar: React.FC<LoginBarProps> = () => {
 
   return (
     <form
-      className="flex space-x-3"
+      className="flex space-x-3 my-0"
       onSubmit={async (e) => {
         e.preventDefault();
         setLoading(true);
@@ -37,21 +37,23 @@ export const LoginBar: React.FC<LoginBarProps> = () => {
     >
       <input
         required
+        autoComplete="off"
         className="px-2 h-6 bg-surface2 outline-none"
         name="u"
         placeholder="u"
       />
       <input
         required
+        autoComplete="off"
         className="px-2 h-6 bg-surface2 outline-none"
         name="p"
         placeholder="p"
       />
       <BlockButton
         loading={loading}
-        className={[error ? "!text-red-700" : "", "w-14 h-6"].join(" ")}
+        className={[error ? "!text-red-700" : "", "w-16 h-6"].join(" ")}
       >
-        Dick
+        knock
       </BlockButton>
     </form>
   );

@@ -1,3 +1,3 @@
-const portName = Math.random() + "-" + new Date().getTime();
+const portName = new Date().getTime() + Math.random().toString();
 
 export const getPortName = () => portName;

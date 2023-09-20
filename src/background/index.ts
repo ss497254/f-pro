@@ -1,6 +1,3 @@
-import reloadOnUpdate from "virtual:reload-on-update-in-background-script";
-reloadOnUpdate("background");
-
 import "./command";
 import "./inject-script";
 import "./messages";

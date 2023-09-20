@@ -1,3 +1,4 @@
+import { rmSync, writeFileSync } from "fs";
 import packageJson from "./package.json";
 
 const manifest: chrome.runtime.ManifestV3 = {
@@ -19,7 +20,7 @@ const manifest: chrome.runtime.ManifestV3 = {
     type: "module",
   },
   action: {
-    default_popup: "src/popup/index.html",
+    default_popup: "index.html",
     default_icon: "icon48.png",
   },
   icons: {
@@ -32,10 +33,14 @@ const manifest: chrome.runtime.ManifestV3 = {
   host_permissions: ["http://*/*", "https://*/*", "<all_urls>"],
   web_accessible_resources: [
     {
-      resources: ["assets/js/*.js", "assets/css/*.css"],
+      resources: ["*.hot-update.json"],
       matches: ["*://*/*"],
     },
   ],
 };
 
-export default manifest;
+console.log("\x1b[1m\x1b[32m" + "Writing manifest.json to public");
+writeFileSync("public/manifest.json", JSON.stringify(manifest));
+
+console.log("Removing manifest.js" + "\x1b[0m");
+rmSync("manifest.js");

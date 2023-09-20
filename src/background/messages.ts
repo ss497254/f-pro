@@ -1,5 +1,6 @@
 import { handleLogin } from "./handler/login";
-import { getPortName } from "./utils/port";
+import { chromeFetch } from "./utils/chrome-fetch";
+import { loadScript } from "./utils/load-script";
 
 export const messageHandler = (
   message: any,
@@ -11,24 +12,25 @@ export const messageHandler = (
   if (!("type" in message)) return;
 
   switch (message.type) {
+    case "fetch": {
+      chromeFetch(message, sendResponse);
+
+      return true;
+    }
     case "login": {
-      handleLogin({
-        username: message.u,
-        password: message.p,
-      })
-        .then(({ user }) => {
-          sendResponse({
-            type: "success",
-            user,
-            port: getPortName(),
-          });
-        })
-        .catch((e) => sendResponse({ type: "error", message: e.message }));
+      handleLogin(message.u, message.p, sendResponse);
 
       return true;
     }
     case "ping": {
       return sendResponse({ type: "pong" });
+    }
+    case "load_script": {
+      if (!sender.tab || !sender.tab.id || !("file" in message)) return;
+
+      loadScript(sender.tab.id, message.file);
+
+      return true;
     }
     default:
       return sendResponse({ type: "error", content: "Invalid message type" });

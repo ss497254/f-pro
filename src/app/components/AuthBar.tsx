@@ -1,9 +1,9 @@
-import { ContentBar } from "@app/components/ContentBar";
-import { LoginBar } from "@app/components/LoginBar";
-import { useConfigStore } from "@app/stores/useConfigStore";
-import { BarNotification } from "@app/ui/Notifications/BarNotification";
-import { useNotificationStore } from "@app/stores/useNotificationsStore";
-import { ErrorBoundary } from "@app/ui/ErrorBoundary";
+import { ContentBar } from "app/components/ContentBar";
+import { LoginBar } from "app/components/LoginBar";
+import { useConfigStore } from "app/stores/useConfigStore";
+import { BarNotification } from "app/ui/Notifications/BarNotification";
+import { useNotificationStore } from "app/stores/useNotificationsStore";
+import { ErrorBoundary } from "app/ui/ErrorBoundary";
 
 export function AuthBar() {
   const user = useConfigStore((state) => state.user);

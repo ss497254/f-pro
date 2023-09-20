@@ -1,6 +1,7 @@
 export * from "./BackIcon";
 export * from "./BugIcon";
 export * from "./CalendarIcon";
+export * from "./CameraIcon";
 export * from "./CaretIcon";
 export * from "./CaretRightIcon";
 export * from "./CloseIcon";

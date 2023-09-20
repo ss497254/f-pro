@@ -1,24 +1,22 @@
-import { API_URL } from "../constants";
+import { getConfig } from "../config";
 import { sleep } from "./sleep";
-
-export interface ResponseType<T> {
-  success: boolean;
-  data: T;
-  message?: string;
-}
+import { ResponseType } from "src/types/ResponseType";
 
 export const Cfetch = async <T>(
   input: string,
   init?: RequestInit | undefined
 ) => {
-  const res = await fetch(API_URL + input, {
+  const token = getConfig("token");
+  const headers = {
+    Accept: "application/json",
+    "Content-Type": "application/json",
+  } as any;
+
+  if (token) headers!.Authorization = `Bearer ${token}`;
+
+  const res = await fetch(getConfig("API_URL") + input, {
     ...init,
-    credentials: "include",
-    headers: {
-      Accept: "application/json",
-      "Content-Type": "application/json",
-      ...init?.headers,
-    },
+    headers,
   });
 
   let output: ResponseType<T>;

@@ -30,11 +30,7 @@ class LoadScriptRuntimeModule extends HelperRuntimeModule {
         "chrome.runtime.sendMessage({",
         Template.indent([
           `type: 'load_script',`,
-          "payload: {",
-          Template.indent([
-            `file: url.replace(${RuntimeGlobals.publicPath},'')`,
-          ]),
-          "}",
+          `file: url.replace(${RuntimeGlobals.publicPath},'')`,
         ]),
         "}, () => {",
         Template.indent([

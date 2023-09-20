@@ -7,7 +7,6 @@
     "manifest": "tsc --resolveJsonModule --esModuleInterop manifest.ts && node manifest.js",
     "dev": "npm run manifest && webpack-dev-server"
   },
-  "type": "module",
   "dependencies": {
     "eventemitter2": "^6.4.9",
     "react": "18.2.0",

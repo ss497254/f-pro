@@ -1,5 +1,5 @@
-import { getConfig } from "../config";
-import { sleep } from "./sleep";
+import { getConfig } from "src/background/config";
+import { sleep } from "src/utils/sleep";
 import { ResponseType } from "src/types/ResponseType";
 
 export const Cfetch = async <T>(

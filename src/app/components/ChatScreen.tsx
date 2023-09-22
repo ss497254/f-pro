@@ -5,24 +5,7 @@ import { IconButton } from "app/ui/Buttons";
 import { MessageInputBar } from "app/ui/MessageInput";
 import { MessagesContainer } from "app/ui/Messages";
 import { getChannelStore } from "app/stores/getChannelStore";
-
-const DragFn = () => {
-  let x = 20,
-    y = 40;
-
-  return (e: React.DragEvent<HTMLDivElement>) => {
-    e.stopPropagation();
-
-    const element = e.currentTarget.parentNode?.parentNode?.parentElement;
-    if (!element) return;
-
-    element.style.left = x + "px";
-    element.style.top = y + "px";
-
-    x = e.clientX - 30;
-    y = e.clientY - 30;
-  };
-};
+import { takeScreenShot } from "app/lib/screenshot";
 
 interface ChatScreenProps extends React.HTMLAttributes<HTMLDivElement> {
   channel: string;
@@ -45,7 +28,7 @@ export const ChatScreen: React.FC<ChatScreenProps> = ({
           <FullscreenIcon size={10} />
         </div>
         <h4 className="flex-grow">{channel}</h4>
-        <IconButton>
+        <IconButton onClick={async () => await takeScreenShot(channel)}>
           <CameraIcon size={20} />
         </IconButton>
         <IconButton onClick={clearMessages}>
@@ -57,3 +40,21 @@ export const ChatScreen: React.FC<ChatScreenProps> = ({
     </div>
   );
 };
+
+function DragFn() {
+  let x = 20,
+    y = 40;
+
+  return (e: React.DragEvent<HTMLDivElement>) => {
+    e.stopPropagation();
+
+    const element = e.currentTarget.parentNode?.parentElement;
+    if (!element) return;
+
+    element.style.left = x + "px";
+    element.style.top = y + "px";
+
+    x = e.clientX - 30;
+    y = e.clientY - 30;
+  };
+}

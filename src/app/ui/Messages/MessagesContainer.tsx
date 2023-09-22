@@ -1,8 +1,8 @@
-import { useScrollToBottom } from "@app/hooks/useScrollToBottom";
-import { useConfigStore } from "@app/stores/useConfigStore";
-import { Spinner } from "@app/ui/Spinner";
-import { getMessageStore } from "@root/src/app/lib/getMessageStore";
-import React, { useEffect } from "react";
+import { useScrollToBottom } from "app/hooks/useScrollToBottom";
+import { getChannelStore } from "app/stores/getChannelStore";
+import { useConfigStore } from "app/stores/useConfigStore";
+import { Spinner } from "app/ui/Spinner";
+import React from "react";
 import { BlockButton } from "../Buttons";
 import { MessageBox } from "./MessageBox";
 
@@ -13,21 +13,22 @@ interface MessagesContainerProps extends React.PropsWithChildren {
 export const MessagesContainer: React.FC<MessagesContainerProps> = ({
   channel,
 }) => {
-  const { ref, scroll } = useScrollToBottom();
+  const { scrollRef } = useScrollToBottom(channel);
 
   return (
-    <div className="flex-grow overflow-auto p-1.5" ref={ref}>
+    <div className="flex-grow overflow-auto p-1.5" ref={scrollRef}>
       <OldMessagesList channel={channel} />
-      <NewMessagesList channel={channel} scroll={scroll} />
+      <NewMessagesList channel={channel} />
     </div>
   );
 };
 
 export const OldMessagesList: React.FC<{ channel: string }> = ({ channel }) => {
   const { username } = useConfigStore((state) => state.user)!;
-  const [oldMessages, isLoading, loadOldMessages] = getMessageStore(channel)(
-    (state) => [state.oldMessages, state.isLoading, state.loadOldMessages]
-  );
+  const store = getChannelStore(channel);
+  const isLoading = store((state) => state.isLoading);
+  const oldMessages = store((state) => state.oldMessages);
+  const loadOldMessages = store((state) => state.loadOldMessages);
 
   return (
     <>
@@ -53,12 +54,9 @@ export const OldMessagesList: React.FC<{ channel: string }> = ({ channel }) => {
 
 export const NewMessagesList: React.FC<{
   channel: string;
-  scroll: () => void;
-}> = ({ channel, scroll }) => {
+}> = ({ channel }) => {
   const { username } = useConfigStore((state) => state.user)!;
-  const newMessages = getMessageStore(channel)((state) => state.newMessages);
-
-  useEffect(scroll, [newMessages]);
+  const newMessages = getChannelStore(channel)((state) => state.newMessages);
 
   return (
     <>

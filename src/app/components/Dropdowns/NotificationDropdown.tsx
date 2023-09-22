@@ -7,18 +7,21 @@ interface NotificationsDropdownProps extends React.PropsWithChildren {}
 export const NotificationsDropdown: React.FC<
   NotificationsDropdownProps
 > = ({}) => {
-  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [left, setLeft] = useState(-1);
 
   return (
     <>
       <button
         className="p-1.5 hover:bg-surface2 transition duration-150"
-        onClick={() => setDropdownOpen(!dropdownOpen)}
+        onClick={(e) => setLeft(left === -1 ? e.clientX : -1)}
       >
         <NotificationIcon size={15} />
       </button>
-      {dropdownOpen && (
-        <div className="z-50 absolute border border-surface3 top-8 left-16 p-2 pr-1 rounded-md overflow-y-scroll break-words [&::-webkit-scrollbar]:w-1 [&::-webkit-scrollbar-thumb]:bg-surface2 [&::-webkit-scrollbar-thumb]:rounded-sm bg-surface1 w-[360px] max-h-[360px]">
+      {left !== -1 && (
+        <div
+          className="z-50 absolute resize-x border border-surface3 top-8 p-2 pr-1 rounded-xl overflow-y-scroll break-words scroll-thin [&::-webkit-scrollbar-thumb]:rounded-sm bg-surface1 w-[360px] max-h-[480px]"
+          style={{ left }}
+        >
           <NotificationsList />
         </div>
       )}

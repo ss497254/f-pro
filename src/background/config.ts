@@ -9,5 +9,4 @@ type Key = keyof typeof config;
 export const getConfig = (key: Key) => config[key];
 
 export const setConfig = (key: Key, value: any) =>
-  // @ts-ignore
-  (config[key] = value);
+  ((config as any)[key] = value);

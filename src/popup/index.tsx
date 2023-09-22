@@ -1,10 +1,7 @@
-import refreshOnUpdate from "virtual:reload-on-update-in-view";
-refreshOnUpdate("popup");
-
 import React from "react";
 import { createRoot } from "react-dom/client";
 import Popup from "./Popup";
-import { attachTwindStyle } from "@src/shared/style/twind";
+import { attachTwindStyle } from "src/shared/style/twind";
 
 const appContainer = document.querySelector("#app");
 if (!appContainer) {

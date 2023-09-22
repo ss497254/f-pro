@@ -8,5 +8,8 @@ if (__webpack_public_path__) {
     require("webpack-dev-server/client?hot=true&protocol=ws&hostname=localhost&port=9999");
   }
 }
+if (typeof process && process.env.NODE_ENV === "production") {
+  require("src/utils/override-console");
+}
 
 import "./app";

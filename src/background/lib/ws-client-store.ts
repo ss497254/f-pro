@@ -11,7 +11,7 @@ export const getWSClient = () => {
 };
 
 export const initializeWSClient = (portName: string) => {
-  if (client) return;
+  if (client) cleanClient();
 
   console.log("Initialized");
   client = new WebSocketClient({
@@ -23,14 +23,17 @@ export const initializeWSClient = (portName: string) => {
 
   listner = function (port: chrome.runtime.Port) {
     if (port.name !== portName || !client) return;
+    let active = true;
 
     client.onAny((event, data, ...x) => {
-      console.info(event, data, ...x, typeof x);
-      port.postMessage({ event, data, extra: x });
+      if (active) port.postMessage({ event, data, extra: x });
     });
 
     client.connect();
-    port.onDisconnect.addListener(cleanClient);
+    port.onDisconnect.addListener(() => {
+      cleanClient();
+      active = false;
+    });
   };
 
   chrome.runtime.onConnect.addListener(listner);
@@ -40,8 +43,8 @@ export const initializeWSClient = (portName: string) => {
 
 export const cleanClient = () => {
   if (client) {
-    client.disconnect();
     client.removeAllListeners();
+    client.disconnect();
 
     client = undefined;
   }

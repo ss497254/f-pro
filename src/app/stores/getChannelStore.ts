@@ -14,8 +14,9 @@ export interface IMessageStore {
   toasts: IChannelToast[];
   channel: string;
   isLoading: boolean;
+  hasAttachment: boolean;
   isSubmitting: boolean;
-  sendMessage: (content: string) => Promise<boolean>;
+  sendMessage: (content: string, image?: string) => Promise<boolean>;
   addMessage: (message: IMessage, override?: boolean) => void;
   loadOldMessages: () => Promise<void>;
   clearMessages: () => void;
@@ -38,13 +39,15 @@ export const getChannelStore = (channel: string) => {
     isSubmitting: false,
     newMessages: [],
     oldMessages: [],
+    hasAttachment: false,
 
-    sendMessage: async (content) => {
+    sendMessage: async (content, image) => {
       set({ isSubmitting: true });
 
       const res = await Post<IMessage>("/chats/send-message", {
         channel,
         content,
+        image,
       });
 
       if (res.success) {

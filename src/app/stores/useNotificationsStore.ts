@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { INotification } from "@app/types/INotification";
+import { INotification } from "src/types/INotification";
 
 interface NotificationStoreState {
   notifications: INotification[];

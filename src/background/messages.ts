@@ -1,6 +1,7 @@
 import { handleLogin } from "./handler/login";
-import { chromeFetch } from "./utils/chrome-fetch";
-import { loadScript } from "./utils/load-script";
+import { screenshot } from "./handler/screenshot";
+import { chromeFetch } from "./handler/chrome-fetch";
+import { loadScript } from "./handler/load-script";
 
 export const messageHandler = (
   message: any,
@@ -12,6 +13,9 @@ export const messageHandler = (
   if (!("type" in message)) return;
 
   switch (message.type) {
+    case "ping": {
+      return sendResponse({ type: "pong" });
+    }
     case "fetch": {
       chromeFetch(message, sendResponse);
 
@@ -22,12 +26,13 @@ export const messageHandler = (
 
       return true;
     }
-    case "ping": {
-      return sendResponse({ type: "pong" });
+    case "capture": {
+      screenshot(sendResponse);
+
+      return true;
     }
     case "load_script": {
       if (!sender.tab || !sender.tab.id || !("file" in message)) return;
-
       loadScript(sender.tab.id, message.file);
 
       return true;

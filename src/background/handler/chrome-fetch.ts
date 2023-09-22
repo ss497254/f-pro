@@ -1,4 +1,4 @@
-import { Cfetch } from "./fetch";
+import { Cfetch } from "../utils/fetch";
 
 export const chromeFetch = async (
   { url, method, data }: { url: string; method?: string; data: any },

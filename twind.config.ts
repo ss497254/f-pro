@@ -55,6 +55,11 @@ export default defineConfig({
           "3xl": [30, 36],
           "4xl": [36, 40],
         },
+        fontFamily: {
+          sans: [
+            "system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif",
+          ],
+        },
         extend: {
           colors: {
             surface1: "var(--surface1)",
@@ -62,11 +67,11 @@ export default defineConfig({
             surface3: "var(--surface3)",
             surface4: "var(--surface4)",
             surface5: "var(--surface5)",
-            text1: "var(--text1)",
-            text2: "var(--text2)",
-            text3: "var(--text3)",
-            text4: "var(--text4)",
-            text5: "var(--text5)",
+            color1: "var(--color1)",
+            color2: "var(--color2)",
+            color3: "var(--color3)",
+            color4: "var(--color4)",
+            color5: "var(--color5)",
           },
         },
       },

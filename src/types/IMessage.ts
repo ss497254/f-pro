@@ -3,4 +3,5 @@ export interface IMessage {
   username: string;
   timestamp: number;
   delivering?: boolean;
+  image?: string;
 }

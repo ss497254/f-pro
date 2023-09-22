@@ -1,4 +1,5 @@
 import { EventEmitter2 } from "eventemitter2";
+
 export interface Connection extends EventTarget {
   onerror: ((ev: Event) => void) | null;
   onmessage: ((ev: MessageEvent) => void) | null;
@@ -8,7 +9,6 @@ export interface Connection extends EventTarget {
 }
 
 export interface Props<T> {
-  retryOnFail?: boolean;
   getConnection: () => T;
 }
 
@@ -19,12 +19,14 @@ export interface State {
 
 export class WebSocketClient<T extends Connection> extends EventEmitter2 {
   connection?: T;
+  isConnected = false;
   isConnecting = false;
   isResolving = false;
-  retryOnFail;
+  isRetrying = false;
+  retries = 0;
   getConnection: () => T;
 
-  constructor({ getConnection, retryOnFail = false }: Props<T>) {
+  constructor({ getConnection }: Props<T>) {
     super({
       wildcard: true,
       verboseMemoryLeak: true,
@@ -37,12 +39,11 @@ export class WebSocketClient<T extends Connection> extends EventEmitter2 {
       maxListeners: 25,
     });
 
-    this.retryOnFail = retryOnFail;
     this.getConnection = getConnection;
   }
 
   async connect() {
-    if (this.isConnecting || this.connection) return;
+    if (this.isConnecting || this.isResolving || this.isConnected) return;
 
     try {
       this.isConnecting = true;
@@ -50,7 +51,7 @@ export class WebSocketClient<T extends Connection> extends EventEmitter2 {
 
       this.connection = this.getConnection();
       this.isConnecting = false;
-      this.isResolving = false;
+      this.isResolving = true;
       this.emit("state", { status: "resolving" });
 
       this.connection.onmessage = this.onmessage.bind(this);
@@ -66,22 +67,22 @@ export class WebSocketClient<T extends Connection> extends EventEmitter2 {
   }
 
   reconnect() {
-    if (this.isConnecting) return;
-    if (this.connection) this.disconnect();
-
+    this.disconnect();
     this.connect();
-    console.log("reconnecting");
   }
 
   disconnect() {
-    this.connection?.close();
+    if (this.connection) this.connection.close();
+
+    this.isConnected = false;
     this.connection = undefined;
-    console.log("disconnected");
   }
 
   private onmessage: NonNullable<Connection["onmessage"]> = (e) => {
-    if (!this.isResolving) {
-      this.isResolving = true;
+    if (this.isResolving) {
+      this.retries = 0;
+      this.isResolving = false;
+      this.isConnected = true;
       this.emit("state", { status: "connected" });
     }
 
@@ -93,16 +94,14 @@ export class WebSocketClient<T extends Connection> extends EventEmitter2 {
   };
 
   private onerror: NonNullable<Connection["onerror"]> = (e) => {
-    console.log("error", e);
-
     this.emit("state", { status: "error", error: JSON.stringify({ ...e }) });
-    if (this.retryOnFail) this.reconnect();
+    this.isConnected = false;
+    console.warn("ws-client-error", e);
   };
 
   private onclose: NonNullable<Connection["onclose"]> = (e) => {
-    console.log("close", e);
-
     this.emit("state", { status: "closed", error: JSON.stringify({ ...e }) });
-    if (this.retryOnFail) this.reconnect();
+    this.isConnected = false;
+    console.log("ws-client-close", e);
   };
 }

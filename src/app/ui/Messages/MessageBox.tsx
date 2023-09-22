@@ -1,4 +1,4 @@
-import { IMessage } from "@app/types/IMessage";
+import { IMessage } from "src/types/IMessage";
 import React from "react";
 
 interface props extends IMessage {
@@ -10,9 +10,14 @@ const dirClassNames = {
   right: "ml-auto",
 };
 
-export const MessageBox: React.FC<props> = ({ content, dir, timestamp }) => {
-  // console.count(content.substring(0, 10));
-
+export const MessageBox: React.FC<props> = ({
+  content,
+  dir,
+  timestamp,
+  username,
+  delivering,
+  image,
+}) => {
   return (
     <div
       className={[
@@ -20,11 +25,26 @@ export const MessageBox: React.FC<props> = ({ content, dir, timestamp }) => {
         dirClassNames[dir],
       ].join(" ")}
     >
+      {image && (
+        <div
+          className="py-4 mb-1 text-center"
+          style={{
+            backgroundImage:
+              "radial-gradient(var(--surface5) 1px, var(--surface3) 1px)",
+            backgroundSize: "10px 10px",
+          }}
+        >
+          Image
+        </div>
+      )}
       <p className="overflow-x-hidden text-sm hover:break-words text-ellipsis">
         {content}
       </p>
-      <div className="mt-2 -mb-2 -mr-1 text-xs text-right">
-        {new Date(timestamp).toTimeString().substring(0, 5)}
+      <div className="mt-3 -mb-1 text-xs flex">
+        <div className="flex-grow font-medium">
+          {dir === "left" ? username : delivering ? "✔" : "✔✔"}
+        </div>
+        {new Date(timestamp).toLocaleString()}
       </div>
     </div>
   );

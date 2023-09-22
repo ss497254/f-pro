@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNotificationStore } from "@app/stores/useNotificationsStore";
+import { useNotificationStore } from "app/stores/useNotificationsStore";
 import { Button } from "../Buttons";
 
 interface NotificationsListProps extends React.PropsWithChildren {}

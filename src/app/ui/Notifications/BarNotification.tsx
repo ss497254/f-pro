@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useNotificationStore } from "@app/stores/useNotificationsStore";
+import { useNotificationStore } from "app/stores/useNotificationsStore";
 
 interface BarNotificationProps extends React.PropsWithChildren {}
 

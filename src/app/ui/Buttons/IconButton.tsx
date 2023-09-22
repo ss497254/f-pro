@@ -12,7 +12,7 @@ export interface IconButtonProps
 }
 export const IconButton: React.FC<IconButtonProps> = ({
   className,
-  btn,
+  btn = "default",
   children,
   loading,
   size = 30,
@@ -23,7 +23,7 @@ export const IconButton: React.FC<IconButtonProps> = ({
       style={{ height: size, width: size }}
       className={[
         "flex justify-center items-center rounded-md",
-        btn ? ButtonTypes[btn] : "bg-surface2 hover:bg-surface3",
+        ButtonTypes[btn],
         className,
       ].join(" ")}
       {...prop}

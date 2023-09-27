@@ -1,9 +1,10 @@
 import { ContentBar } from "app/components/ContentBar";
 import { LoginBar } from "app/components/LoginBar";
 import { useConfigStore } from "app/stores/useConfigStore";
-import { BarNotification } from "app/ui/Notifications/BarNotification";
 import { useNotificationStore } from "app/stores/useNotificationsStore";
 import { ErrorBoundary } from "app/ui/ErrorBoundary";
+import { BarNotification } from "app/ui/Notifications/BarNotification";
+import { WSClientStatus } from "./WSClientStatus";
 
 export function AuthBar() {
   const user = useConfigStore((state) => state.user);
@@ -12,7 +13,7 @@ export function AuthBar() {
   );
 
   return (
-    <div className="px-2 flex-grow flex justify-between items-center">
+    <div className="pl-2 flex-grow flex items-center">
       <ErrorBoundary
         onError={(e, eInfo) =>
           addNotification({
@@ -25,7 +26,9 @@ export function AuthBar() {
       >
         {user ? <ContentBar /> : <LoginBar />}
       </ErrorBoundary>
+      <div className="flex-grow" />
       <BarNotification />
+      {user && <WSClientStatus />}
     </div>
   );
 }

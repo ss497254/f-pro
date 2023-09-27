@@ -1,7 +1,14 @@
-export const loadScript = (tabId: number, file: string) => {
-  chrome.scripting.executeScript({
-    target: { tabId },
-    injectImmediately: true,
-    files: [file],
-  });
+export const loadScript = (
+  { tab }: chrome.runtime.MessageSender,
+  file: string
+) => {
+  if (tab && tab.id && file) {
+    const tabId = tab.id;
+
+    chrome.scripting.executeScript({
+      target: { tabId },
+      injectImmediately: true,
+      files: [file],
+    });
+  }
 };

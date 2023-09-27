@@ -32,7 +32,7 @@ export const OldMessagesList: React.FC<{ channel: string }> = ({ channel }) => {
 
   return (
     <>
-      <div className="py-6 flex justify-center">
+      <div className="h-20 items-center flex justify-center">
         {isLoading ? (
           <Spinner size={30} />
         ) : (

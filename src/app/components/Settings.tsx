@@ -1,14 +1,12 @@
-import React from "react";
-import { useConfigStore } from "app/stores/useConfigStore";
-import { useNotificationStore } from "app/stores/useNotificationsStore";
 import { handleLogout } from "app/lib/auth";
+import { useConfigStore } from "app/stores/useConfigStore";
 import { Button } from "app/ui/Buttons";
+import React from "react";
 
 interface SettingsProps extends React.PropsWithChildren {}
 
 export const Settings: React.FC<SettingsProps> = () => {
-  const { user } = useConfigStore();
-  const { addNotification } = useNotificationStore();
+  const { user, update, imagePreviewEnabled } = useConfigStore();
 
   return (
     <>
@@ -20,26 +18,10 @@ export const Settings: React.FC<SettingsProps> = () => {
       </div>
       <Button
         size="lg"
-        onClick={() =>
-          setTimeout(() => {
-            throw new Error("Error from settings");
-          }, 500)
-        }
+        onClick={() => update("imagePreviewEnabled", !imagePreviewEnabled)}
         className="w-full"
       >
-        Throw Error
-      </Button>
-      <Button
-        size="lg"
-        onClick={() =>
-          addNotification({
-            type: Math.random() > 0.5 ? "error" : "info",
-            content: "This is a random notification.",
-          })
-        }
-        className="w-full"
-      >
-        Add Notification
+        Image preview ({imagePreviewEnabled ? "on" : "off"})
       </Button>
       <Button onClick={handleLogout} btn="danger" size="lg" className="w-full">
         Logout

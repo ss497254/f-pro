@@ -2,6 +2,7 @@ import { handleLogin } from "./handler/login";
 import { screenshot } from "./handler/screenshot";
 import { chromeFetch } from "./handler/chrome-fetch";
 import { loadScript } from "./handler/load-script";
+import { getWSClient } from "./lib/ws-client-store";
 
 export const messageHandler = (
   message: any,
@@ -15,6 +16,9 @@ export const messageHandler = (
   switch (message.type) {
     case "ping": {
       return sendResponse({ type: "pong" });
+    }
+    case "reconnect": {
+      return getWSClient().reconnect();
     }
     case "fetch": {
       chromeFetch(message, sendResponse);
@@ -32,8 +36,7 @@ export const messageHandler = (
       return true;
     }
     case "load_script": {
-      if (!sender.tab || !sender.tab.id || !("file" in message)) return;
-      loadScript(sender.tab.id, message.file);
+      loadScript(sender, message.file);
 
       return true;
     }

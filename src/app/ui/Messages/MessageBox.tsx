@@ -1,5 +1,9 @@
 import { IMessage } from "src/types/IMessage";
 import React from "react";
+import useLongPress from "app/hooks/useLongPress";
+import { IconButton } from "../Buttons";
+import { EditIcon } from "app/icons";
+import { ImagePreview } from "../ImagePreview";
 
 interface props extends IMessage {
   dir: "left" | "right";
@@ -18,25 +22,30 @@ export const MessageBox: React.FC<props> = ({
   delivering,
   image,
 }) => {
+  const { longpress, handlers } = useLongPress();
+
   return (
     <div
       className={[
-        "max-w-[80%] p-3 whitespace-pre-wrap bg-surface2 mx-3 my-1.5 relative rounded-md outline-none",
+        "max-w-[80%] p-3 whitespace-pre-wrap mx-3 my-1.5 relative rounded-md outline-none",
+        longpress ? "bg-surface3" : "bg-surface2",
         dirClassNames[dir],
       ].join(" ")}
+      {...handlers}
     >
-      {image && (
+      {longpress && (
         <div
-          className="py-4 mb-1 text-center"
-          style={{
-            backgroundImage:
-              "radial-gradient(var(--surface5) 1px, var(--surface3) 1px)",
-            backgroundSize: "10px 10px",
-          }}
+          className={[
+            "absolute bottom-1",
+            dir === "right" ? "-left-8" : "-right-8",
+          ].join(" ")}
         >
-          Image
+          <IconButton>
+            <EditIcon />
+          </IconButton>
         </div>
       )}
+      {image && <ImagePreview src={image} />}
       <p className="overflow-x-hidden text-sm hover:break-words text-ellipsis">
         {content}
       </p>

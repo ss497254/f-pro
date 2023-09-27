@@ -1,8 +1,8 @@
 import { NotificationsDropdown } from "app/components/Dropdowns/NotificationDropdown";
 import { SettingsDropdown } from "app/components/Dropdowns/SettingsDropdown";
 import { useConfigStore } from "app/stores/useConfigStore";
-import { ChannelDropdown } from "src/app/components/Dropdowns/ChannelDropdown";
 import React from "react";
+import { ChannelDropdown } from "src/app/components/Dropdowns/ChannelDropdown";
 import { ChangeColorModeBtn } from "./ChangeColorModeBtn";
 
 interface ContentBarProps extends React.PropsWithChildren {}

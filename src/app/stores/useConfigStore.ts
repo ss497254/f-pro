@@ -1,12 +1,15 @@
 import { create } from "zustand";
-import { IUser } from "@app/types/IUser";
+import { IUser } from "src/types/IUser";
 
 interface ConfigState {
+  imagePreviewEnabled: boolean;
   user: IUser | undefined;
+
   update: (key: keyof Omit<ConfigState, "update">, value: any) => void;
 }
 
 export const useConfigStore = create<ConfigState>()((set) => ({
-  user: { username: "ss497254", admin: true, permissions: [] },
+  imagePreviewEnabled: false,
+  user: undefined,
   update: (key, value) => set({ [key]: value }),
 }));

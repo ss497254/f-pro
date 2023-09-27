@@ -14,7 +14,9 @@ export const takeScreenShot = async (channel: string) => {
     clearLastScreenShot();
     lastScreenshot = data.url;
 
-    getChannelStore(channel).setState({ hasAttachment: true });
+    queueMicrotask(() =>
+      getChannelStore(channel).setState({ hasAttachment: true })
+    );
     clearLastScreenShot = () => {
       lastScreenshot = "";
       getChannelStore(channel).setState({ hasAttachment: false });

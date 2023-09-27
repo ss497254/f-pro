@@ -2,11 +2,11 @@ import Main from "app/components/Main";
 import { isScriptAlive } from "app/lib/is-script-alive";
 import { keyboardListner } from "app/lib/keyboard-listner";
 import { stopEventPropagation } from "app/lib/stop-event-propagation";
-import { useNotificationStore } from "app/stores/useNotificationsStore";
 import { addStyles } from "app/style";
 import { createRoot } from "react-dom/client";
 import { attachTwindStyle } from "src/shared/style/twind";
 import { setRootElement } from "./lib/root-element";
+import { ErrorListner } from "./lib/error-listner";
 
 isScriptAlive();
 
@@ -18,24 +18,42 @@ const rootIntoShadow = document.createElement("div");
 setRootElement(rootIntoShadow);
 addStyles(rootIntoShadow);
 
+rootIntoShadow.onkeyup = stopEventPropagation;
+rootIntoShadow.oncut = stopEventPropagation;
+rootIntoShadow.oncopy = stopEventPropagation;
+rootIntoShadow.onpaste = stopEventPropagation;
+rootIntoShadow.onblur = stopEventPropagation;
+rootIntoShadow.onfocus = stopEventPropagation;
+rootIntoShadow.onmouseenter = stopEventPropagation;
+rootIntoShadow.onmouseleave = stopEventPropagation;
+rootIntoShadow.onmousemove = stopEventPropagation;
+rootIntoShadow.onmouseout = stopEventPropagation;
+rootIntoShadow.onbeforeinput = stopEventPropagation;
+rootIntoShadow.oninput = stopEventPropagation;
+rootIntoShadow.onchange = stopEventPropagation;
+rootIntoShadow.onanimationstart = stopEventPropagation;
+rootIntoShadow.onanimationcancel = stopEventPropagation;
+rootIntoShadow.onanimationend = stopEventPropagation;
+rootIntoShadow.onanimationiteration = stopEventPropagation;
+rootIntoShadow.oncontextmenu = stopEventPropagation;
+rootIntoShadow.ondblclick = stopEventPropagation;
+rootIntoShadow.onload = stopEventPropagation;
+rootIntoShadow.ongotpointercapture = stopEventPropagation;
+
 rootIntoShadow.onkeydown = (e) => {
   keyboardListner(e);
   stopEventPropagation(e);
 };
-rootIntoShadow.onkeyup = stopEventPropagation;
-rootIntoShadow.onclick = (e) => e.stopPropagation();
+rootIntoShadow.onclick = (e) => {
+  e.stopPropagation();
+};
+rootIntoShadow.onerror = (e) => {
+  console.log("rootIntoShadow error", e);
+  if (typeof e !== "string") stopEventPropagation(e);
+};
 
-window.addEventListener("error", (e) => {
-  useNotificationStore.getState().addNotification({
-    type: "error",
-    content: e.message,
-    extra: {
-      lineno: e.lineno,
-      stack: e.error.stack,
-    },
-  });
-  stopEventPropagation(e);
-});
+window.addEventListener("unhandledrejection", ErrorListner);
+window.addEventListener("error", ErrorListner);
 
 document.addEventListener("keydown", keyboardListner);
 

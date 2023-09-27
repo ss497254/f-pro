@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Chrome extension to add more features to your browser",
   "scripts": {
-    "build": "npm run manifest && webpack",
+    "build": "npm run manifest && webpack --config ./webpack.prod.config.js",
     "manifest": "tsc --resolveJsonModule --esModuleInterop manifest.ts && node manifest.js",
     "dev": "npm run manifest && webpack-dev-server"
   },

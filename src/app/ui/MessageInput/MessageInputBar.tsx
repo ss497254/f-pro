@@ -1,10 +1,10 @@
-import { CloseIcon, SendIcon } from "app/icons";
+import { SendIcon } from "app/icons";
 import { clearLastScreenShot, getLastScreenShot } from "app/lib/screenshot";
 import { getChannelStore } from "app/stores/getChannelStore";
 import { IconButton } from "app/ui/Buttons/IconButton";
 import React, { useEffect, useRef } from "react";
-import { Button } from "../Buttons";
 import { ExpandingTextArea } from "./ExpandingTextArea";
+import { MessageAttachment } from "./MessageAttachment";
 
 interface Props {
   channel: string;
@@ -17,24 +17,28 @@ export const MessageInputBar: React.FC<Props> = ({ channel }) => {
   const hasAttachment = store((state) => state.hasAttachment);
 
   const ref = useRef<HTMLDivElement>(null);
-  const imageRef = useRef<HTMLImageElement>(null);
   const isRunning = useRef(false);
 
   const onSubmit = async () => {
     if (isRunning.current || isSubmitting) return;
 
     isRunning.current = true;
-    await sendMessage(
-      ref.current?.innerText || "(empty)",
-      hasAttachment ? "#" : undefined
-    );
-    if (hasAttachment) clearLastScreenShot();
-    isRunning.current = false;
+    const content = ref.current?.innerText ?? (hasAttachment ? "" : "(empty)");
 
-    if (ref.current) {
-      ref.current.innerText = "";
-      ref.current.focus();
+    if (
+      await sendMessage(
+        content,
+        hasAttachment ? getLastScreenShot() : undefined
+      )
+    ) {
+      if (hasAttachment) clearLastScreenShot();
+
+      if (ref.current) {
+        ref.current.innerText = "";
+        ref.current.focus();
+      }
     }
+    isRunning.current = false;
   };
 
   useEffect(() => {
@@ -47,32 +51,11 @@ export const MessageInputBar: React.FC<Props> = ({ channel }) => {
 
     ref.current?.addEventListener("keydown", fn);
     return () => ref.current?.removeEventListener("keydown", fn);
-  }, []);
+  }, [hasAttachment]);
 
   return (
     <>
-      {hasAttachment && (
-        <div className="bg-surface3">
-          <img
-            key={clearLastScreenShot.toString()}
-            ref={imageRef}
-            className="border border-surface4 max-h-96 mx-auto"
-          ></img>
-          <div className="py-1 px-2 flex justify-between items-center">
-            <Button
-              className="hover:!bg-surface1"
-              onClick={() => {
-                imageRef.current!.src = getLastScreenShot();
-              }}
-            >
-              View attachment
-            </Button>
-            <IconButton onClick={clearLastScreenShot}>
-              <CloseIcon size={15} />
-            </IconButton>
-          </div>
-        </div>
-      )}
+      {hasAttachment && <MessageAttachment />}
       <div className="flex items-end p-2 border-t border-surface2">
         <ExpandingTextArea ref={ref} />
         <IconButton

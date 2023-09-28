@@ -23,7 +23,11 @@ export const MessageInputBar: React.FC<Props> = ({ channel }) => {
     if (isRunning.current || isSubmitting) return;
 
     isRunning.current = true;
-    const content = ref.current?.innerText ?? (hasAttachment ? "" : "(empty)");
+    const content = ref.current!.innerText
+      ? ref.current!.innerText
+      : hasAttachment
+      ? ""
+      : "(empty)";
 
     if (
       await sendMessage(

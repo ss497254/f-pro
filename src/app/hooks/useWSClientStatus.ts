@@ -12,5 +12,6 @@ export const useWSClientStatus = () => {
     port.onMessage.addListener(listner);
     return () => port.onMessage.removeListener(listner);
   }, []);
+
   return status;
 };

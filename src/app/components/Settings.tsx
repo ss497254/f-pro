@@ -1,4 +1,5 @@
 import { handleLogout } from "app/lib/auth";
+import { getRootElement } from "app/lib/root-element";
 import { useConfigStore } from "app/stores/useConfigStore";
 import { Button } from "app/ui/Buttons";
 import React from "react";
@@ -6,6 +7,7 @@ import React from "react";
 interface SettingsProps extends React.PropsWithChildren {}
 
 export const Settings: React.FC<SettingsProps> = () => {
+  const root = getRootElement();
   const { user, update, imagePreviewEnabled } = useConfigStore();
 
   return (
@@ -22,6 +24,23 @@ export const Settings: React.FC<SettingsProps> = () => {
         className="w-full"
       >
         Image preview ({imagePreviewEnabled ? "on" : "off"})
+      </Button>
+      <Button
+        size="lg"
+        onClick={(e) =>
+          root.style.setProperty(
+            "--surface1",
+            (e.currentTarget.childNodes[0] as HTMLInputElement)?.value
+          )
+        }
+        className="w-full"
+      >
+        <input
+          className="mr-3 h-4"
+          type="color"
+          defaultValue={root.style.getPropertyValue("--surface1")}
+        />
+        Background
       </Button>
       <Button onClick={handleLogout} btn="danger" size="lg" className="w-full">
         Logout

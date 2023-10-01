@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import { ChatScreen } from "../ChatScreen";
-import { ZonicIcon } from "../../icons";
+import { ZonicIcon } from "app/icons";
+import { IChannel } from "src/types";
 
 interface ChannelDropdownProps extends React.PropsWithChildren {
-  channel: string;
+  channel: IChannel;
 }
 
 export const ChannelDropdown: React.FC<ChannelDropdownProps> = ({

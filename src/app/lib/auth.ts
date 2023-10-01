@@ -8,6 +8,7 @@ export const handleLogin = async ({ u, p }: any) => {
 
   if (res.type === "success") {
     useConfigStore.getState().update("user", res.user);
+    useConfigStore.getState().update("channels", res.channels);
     connectPort(res.port);
     startScript();
 

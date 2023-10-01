@@ -1,9 +1,11 @@
 import { create } from "zustand";
 import { IUser } from "src/types/IUser";
+import { IChannel } from "src/types/IChannel";
 
 interface ConfigState {
   imagePreviewEnabled: boolean;
-  user: IUser | undefined;
+  user?: IUser;
+  channels?: IChannel[];
 
   update: (key: keyof Omit<ConfigState, "update">, value: any) => void;
 }

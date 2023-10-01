@@ -1,12 +1,8 @@
+import { LoginResponse } from "src/types";
 import { setConfig } from "../config";
 import { initializeWSClient } from "../lib/ws-client-store";
 import { Cfetch } from "../utils/fetch";
 import { getPortName } from "../utils/port";
-
-interface LoginResponse {
-  token: string;
-  user: any;
-}
 
 export const handleLogin = async (
   username: string,
@@ -20,7 +16,7 @@ export const handleLogin = async (
     });
 
     if (res.success) {
-      const { user, token } = res.data;
+      const { user, token, channels } = res.data;
       const port = getPortName();
 
       setConfig("token", token);
@@ -30,6 +26,7 @@ export const handleLogin = async (
         type: "success",
         user,
         port,
+        channels,
       });
     }
 

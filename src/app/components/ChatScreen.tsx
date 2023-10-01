@@ -6,20 +6,19 @@ import { MessageInputBar } from "app/ui/MessageInput";
 import { MessagesContainer } from "app/ui/Messages";
 import { getChannelStore } from "app/stores/getChannelStore";
 import { takeScreenShot } from "app/lib/screenshot";
+import { IChannel } from "src/types/IChannel";
 
 interface ChatScreenProps extends React.HTMLAttributes<HTMLDivElement> {
-  channel: string;
+  channel: IChannel;
   className?: string;
 }
 
 export const ChatScreen: React.FC<ChatScreenProps> = ({
-  channel,
+  channel: { name },
   className,
   ...props
 }) => {
-  const clearMessages = getChannelStore(channel)(
-    (state) => state.clearMessages
-  );
+  const clearMessages = getChannelStore(name)((state) => state.clearMessages);
 
   return (
     <div className={["flex flex-col", className].join(" ")} {...props}>
@@ -27,16 +26,16 @@ export const ChatScreen: React.FC<ChatScreenProps> = ({
         <div className="w-6 h-6 cursor-grab p-2" draggable onDrag={DragFn()}>
           <FullscreenIcon size={10} />
         </div>
-        <h4 className="flex-grow">{channel}</h4>
-        <IconButton onClick={async () => await takeScreenShot(channel)}>
+        <h4 className="flex-grow">{name}</h4>
+        <IconButton onClick={async () => await takeScreenShot(name)}>
           <CameraIcon size={20} />
         </IconButton>
         <IconButton onClick={clearMessages}>
           <ResetIcon size={15} />
         </IconButton>
       </div>
-      <MessagesContainer channel={channel} />
-      <MessageInputBar channel={channel} />
+      <MessagesContainer channel={name} />
+      <MessageInputBar channel={name} />
     </div>
   );
 };

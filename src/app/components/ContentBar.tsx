@@ -8,12 +8,12 @@ import { ChangeColorModeBtn } from "./ChangeColorModeBtn";
 interface ContentBarProps extends React.PropsWithChildren {}
 
 export const ContentBar: React.FC<ContentBarProps> = () => {
-  const user = useConfigStore((state) => state.user)!;
+  const channels = useConfigStore((state) => state.channels)!;
 
   return (
     <div className="flex space-x-0.5">
-      {user.permissions.map((permission, idx) => (
-        <ChannelDropdown key={idx} channel={permission} />
+      {channels.map((channel, idx) => (
+        <ChannelDropdown key={idx} channel={channel} />
       ))}
       <NotificationsDropdown />
       <SettingsDropdown />

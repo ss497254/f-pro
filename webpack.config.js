@@ -14,7 +14,7 @@ module.exports = {
     client: false,
     port: 9999,
     static: { watch: false },
-    allowedHosts: ["cses.fi"],
+    allowedHosts: ["cses.fi", "localhost"],
     devMiddleware: {
       writeToDisk: true,
     },

@@ -20,6 +20,7 @@ export interface State {
 export class WebSocketClient<T extends Connection> extends EventEmitter2 {
   connection?: T;
   isConnected = false;
+  keepAliveDuration = 1000 * 60; // 1 min;
   isConnecting = false;
   isResolving = false;
   isRetrying = false;
@@ -78,12 +79,23 @@ export class WebSocketClient<T extends Connection> extends EventEmitter2 {
     this.connection = undefined;
   }
 
+  keepAlive() {
+    if (this.ping()) setTimeout(this.ping.bind(this), this.keepAliveDuration);
+  }
+
+  ping() {
+    if (!this.isConnected) return false;
+    this.connection?.send("{type:'ping'}");
+    return true;
+  }
+
   private onmessage: NonNullable<Connection["onmessage"]> = (e) => {
     if (this.isResolving) {
       this.retries = 0;
       this.isResolving = false;
       this.isConnected = true;
       this.emit("state", { status: "connected" });
+      this.keepAlive();
     }
 
     if (typeof e.data === "string") {

@@ -3,3 +3,4 @@ export * from "./IMessage";
 export * from "./INotification";
 export * from "./IUser";
 export * from "./ResponseType";
+export * from "./SendText";

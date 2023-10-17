@@ -2,11 +2,11 @@ import { getConfig } from "src/background/config";
 import { sleep } from "src/utils/sleep";
 import { ResponseType } from "src/types/ResponseType";
 
-export const Cfetch = async <T>(
+export const Cfetch = async <T = {}>(
   input: string,
-  init?: RequestInit | undefined
+  init?: RequestInit & { baseUrl?: string }
 ) => {
-  const token = getConfig("token");
+  const token = init?.baseUrl ? undefined : getConfig("token");
   const headers = {
     Accept: "application/json",
     "Content-Type": "application/json",
@@ -14,7 +14,7 @@ export const Cfetch = async <T>(
 
   if (token) headers!.Authorization = `Bearer ${token}`;
 
-  const res = await fetch(getConfig("API_URL") + input, {
+  const res = await fetch((init?.baseUrl ?? getConfig("API_URL")) + input, {
     ...init,
     headers,
   });

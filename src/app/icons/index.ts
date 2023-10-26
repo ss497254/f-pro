@@ -26,6 +26,8 @@ export * from "./NewIcon";
 export * from "./NotificationIcon";
 export * from "./OfficeIcon";
 export * from "./PaperClipIcon";
+export * from "./PauseIcon";
+export * from "./PlayIcon";
 export * from "./PlusIcon";
 export * from "./ProfileIcon";
 export * from "./ProjectIcon";

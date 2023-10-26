@@ -1,5 +1,6 @@
 import { getChannelStore } from "app/stores/getChannelStore";
 import { toggleVisibility } from "./toggle-visibility";
+import { useConfigStore } from "app/stores/useConfigStore";
 
 let lastScreenshot = "";
 export let clearLastScreenShot = () => {};
@@ -9,8 +10,12 @@ export const takeScreenShot = async (channel: string) => {
 
   await new Promise((res) => setTimeout(res, 500));
 
-  const data = await chrome.runtime.sendMessage({ type: "capture" });
-  if (data.type === "capture" && data.url) {
+  const data = await chrome.runtime.sendMessage({
+    type: "capture",
+    quality: useConfigStore.getState().ssQuality,
+  });
+
+  if (data.type === "success" && data.url) {
     clearLastScreenShot();
     lastScreenshot = data.url;
 

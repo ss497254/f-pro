@@ -3,6 +3,8 @@ import { getRootElement } from "app/lib/root-element";
 import { useConfigStore } from "app/stores/useConfigStore";
 import { Button } from "app/ui/Buttons";
 import React from "react";
+import { ScreenshotQualityBtn } from "./ScreenshotQualityBtn";
+import { OpacityBtn } from "./OpacityBtn";
 
 interface SettingsProps extends React.PropsWithChildren {}
 
@@ -23,8 +25,10 @@ export const Settings: React.FC<SettingsProps> = () => {
         onClick={() => update("imagePreviewEnabled", !imagePreviewEnabled)}
         className="w-full"
       >
-        Image preview ({imagePreviewEnabled ? "on" : "off"})
+        Image ({imagePreviewEnabled ? "on" : "off"})
       </Button>
+      <ScreenshotQualityBtn />
+      <OpacityBtn />
       <Button
         size="lg"
         onClick={(e) =>
@@ -42,7 +46,7 @@ export const Settings: React.FC<SettingsProps> = () => {
         />
         Background
       </Button>
-      <Button onClick={handleLogout} btn="danger" size="lg" className="w-full">
+      <Button onClick={handleLogout} size="lg" className="!text-red-500 w-full">
         Logout
       </Button>
     </>

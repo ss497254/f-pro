@@ -1,12 +1,14 @@
 const config = {
-  API_URL: "http://localhost:8080/api",
-  WS_URL: "ws://localhost:8080/ws",
+  API_URL: "https://big-server.onrender.com/api",
+  WS_URL: "wss://big-server.onrender.com/ws",
+  SEND_TEXT_URL: "http://localhost:51212",
   token: "",
 } as const;
 
-type Key = keyof typeof config;
+type Config = typeof config;
+type Key = keyof Config;
 
-export const getConfig = (key: Key) => config[key];
+export const getConfig = <T = Config[Key]>(key: Key) => config[key] as T;
 
 export const setConfig = (key: Key, value: any) =>
   ((config as any)[key] = value);

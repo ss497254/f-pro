@@ -5,6 +5,7 @@ import { useNotificationStore } from "app/stores/useNotificationsStore";
 import { ErrorBoundary } from "app/ui/ErrorBoundary";
 import { BarNotification } from "app/ui/Notifications/BarNotification";
 import { WSClientStatus } from "./WSClientStatus";
+import { ChangeColorModeBtn } from "./ChangeColorModeBtn";
 
 export function AuthBar() {
   const user = useConfigStore((state) => state.user);
@@ -28,6 +29,7 @@ export function AuthBar() {
       </ErrorBoundary>
       <div className="flex-grow" />
       <BarNotification />
+      <ChangeColorModeBtn />
       {user && <WSClientStatus />}
     </div>
   );
